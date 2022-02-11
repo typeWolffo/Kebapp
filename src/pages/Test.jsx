@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { useState } from "react";
+import api from "../services/api";
 
 const StyledPrimary = styled.div`
   background-color: ${({ theme }) => theme.primaryColor};
@@ -34,11 +36,14 @@ const StyledBackground = styled.div`
 `;
 
 function Test() {
+  const [test, setTest] = useState();
+  api.get("/posts/1", (status, response) => setTest(response.body));
   return (
     <>
       <StyledPrimary>primary</StyledPrimary>
       <StyledAccent>accent</StyledAccent>
       <StyledBackground>background</StyledBackground>
+      {test}
     </>
   );
 }
