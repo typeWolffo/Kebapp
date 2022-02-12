@@ -37,7 +37,8 @@ const StyledBackground = styled.div`
 
 function Test() {
   const [test, setTest] = useState();
-  api.get("/posts/1", (status, response) => setTest(response.body));
+  api.get("/test", (status, response) => setTest(response.test));
+  console.log(test);
   return (
     <>
       <StyledPrimary>primary</StyledPrimary>

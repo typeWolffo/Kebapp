@@ -3,9 +3,10 @@ import axios from "axios";
 class Api {
   constructor() {
     const api = axios.create({
-      baseURL: process.env.REACT_APP_BASE_URL,
+      baseURL: "http://vps.zer0xday.p4.tiktalik.io/api",
       headers: {
-        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json;charset=UTF-8",
       },
     });
     api.interceptors.response.use(this.handleSuccess, this.handleError);
@@ -55,15 +56,13 @@ class Api {
       .then((response) => callback(response.status, response.data));
   }
 
-  post(path, payload, callback) {
-    return this.service
-      .request({
-        data: payload,
-        method: "POST",
-        responseType: "json",
-        url: path,
-      })
-      .then((response) => callback(response.status, response.data));
+  post(path, payload) {
+    return this.service.request({
+      data: payload,
+      method: "POST",
+      responseType: "json",
+      url: path,
+    });
   }
 }
 

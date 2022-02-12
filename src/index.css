@@ -4,6 +4,9 @@
   url("./fonts/Ubuntu/Ubuntu-Regular.ttf") format("truetype");
 }
 
+body, html {
+  background-color: #747474;
+}
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
