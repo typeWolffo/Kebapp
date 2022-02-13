@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useMemo, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import PropTypes from "prop-types";
 import { ThemeProvider } from "styled-components";
 
@@ -11,15 +17,19 @@ export default function KebappContext(props) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const theme = {
-    accentColor: "#66fcf1",
-    backgroundColor: "#565353",
-    fontColor: "#e0dddd",
-    primaryColor: "#3f3f3f",
+    accentColor: "#07CFF6",
+    backgroundColor: "#04131E",
+    fontColor: "#07CFF6",
+    primaryColor: "#0D2534",
   };
 
   const setCookie = (userCookie) => {
     document.cookie = userCookie;
   };
+
+  useEffect(() => {
+    if (document.cookie) setIsAuthenticated(true);
+  }, [document.cookie]);
 
   const context = useMemo(
     () => ({
@@ -29,7 +39,7 @@ export default function KebappContext(props) {
     }),
     [setCookie, isAuthenticated, setIsAuthenticated]
   );
-  console.log(isAuthenticated);
+
   return (
     <AppContext.Provider value={context}>
       <ThemeProvider theme={theme}>{children}</ThemeProvider>
@@ -39,6 +49,7 @@ export default function KebappContext(props) {
 KebappContext.defaultProps = {
   children: null,
 };
+
 KebappContext.propTypes = {
   children: PropTypes.element,
 };

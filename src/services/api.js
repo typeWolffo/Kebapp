@@ -9,7 +9,7 @@ class Api {
         "Content-Type": "application/json;charset=UTF-8",
       },
     });
-    api.interceptors.response.use(this.handleSuccess, this.handleError);
+    api.interceptors.response.use(this.handleSuccess);
     this.service = api;
   }
 

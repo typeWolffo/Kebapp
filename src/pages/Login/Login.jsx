@@ -41,14 +41,12 @@ const StyledForm = styled.form`
 
 function Login() {
   const { register, handleSubmit } = useForm();
-  const { setCookie, setIsAuthenticated } = useAppState();
+  const { setCookie } = useAppState();
   const onSubmit = (data) => {
     api
-      .post("/login", data)
-      .then((response) => setCookie(JSON.stringify(response.data.data.user)))
-      .then(setIsAuthenticated(true));
+      .post("/auth/login", data)
+      .then((response) => setCookie(JSON.stringify(response.data.data.user)));
   };
-
   return (
     <StyledFormWrapper>
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
