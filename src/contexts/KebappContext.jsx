@@ -37,9 +37,8 @@ export default function KebappContext(props) {
       setCookie,
       setIsAuthenticated,
     }),
-    [setCookie, isAuthenticated, setIsAuthenticated]
+    [setCookie, isAuthenticated]
   );
-
   return (
     <AppContext.Provider value={context}>
       <ThemeProvider theme={theme}>{children}</ThemeProvider>

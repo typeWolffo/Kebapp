@@ -43,15 +43,17 @@ function Login() {
   const { register, handleSubmit } = useForm();
   const { setCookie } = useAppState();
   const onSubmit = (data) => {
-    api
-      .post("/auth/login", data)
-      .then((response) => setCookie(JSON.stringify(response.data.data.user)));
+    console.log(data);
+
+    api.post("/auth/login", data).then((response) => {
+      setCookie(JSON.stringify(response.data.data.user));
+    });
   };
   return (
     <StyledFormWrapper>
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
         <input
-          type="email"
+          type="text"
           {...register("email", { required: "Field login is required" })}
         />
         <input
