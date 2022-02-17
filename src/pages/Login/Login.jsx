@@ -39,13 +39,16 @@ const StyledForm = styled.form`
   }
 `;
 
-function Login({ setToken }) {
+function Login() {
+  const { setIsAuth } = useAppState();
   const { register, handleSubmit } = useForm();
   const api = useApi();
 
   const onSubmit = (data) => {
-    console.log(data);
-    api.loginUser(data).then((response) => console.log(response));
+    api.loginUser(data).then((response) => {
+      localStorage.setItem("token", response.data.access_token);
+      setIsAuth(true);
+    });
   };
 
   return (

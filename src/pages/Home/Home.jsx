@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import {useApi} from "../../contexts/AuthContext";
+import { useApi } from "../../contexts/AuthContext";
 
 const StyledEventsWrapper = styled.div`
   display: flex;
@@ -54,9 +54,7 @@ const StyledApprove = styled.div`
 
 function Home() {
   const [events, setEvents] = useState();
-  const api = useApi()
-  // const user = JSON.parse(document.cookie);
-  console.log(document.cookie)
+  const api = useApi();
   useEffect(() => {
     api.get("/events", (status, response) => setEvents(response.data.events));
   }, []);
@@ -86,24 +84,22 @@ function Home() {
     <StyledEventsWrapper>
       {events &&
         events.map(
-            // eslint-disable-next-line no-unused-vars
+          // eslint-disable-next-line no-unused-vars
           ({ id, location, start_at: startAt, created_at: createdAt }) => (
             <StyledEvent key={createdAt}>
               <StyledEventDetails>
                 <span>{location}</span>
                 <span>{`${weekdays[getKebsDate(startAt).day]} (${getKebsDate(startAt).date})`}</span>
-                <span>
-                  {`${getKebsDate(startAt).hour}:${getKebsDate(startAt).minute.padStart(2, "0")}`}
-                </span>
+                <span>{`${getKebsDate(startAt).hour}:${getKebsDate(startAt).minute.padStart(2, "0")}`}</span>
               </StyledEventDetails>
               <StyledApprove
-                // onClick={() =>
-                //   api
-                //     .post(`/events/${id}/members`, {
-                //       user_id: user.id,
-                //     })
-                //     .then((response) => console.log(response))
-                // }
+              // onClick={() =>
+              //   api
+              //     .post(`/events/${id}/members`, {
+              //       user_id: user.id,
+              //     })
+              //     .then((response) => console.log(response))
+              // }
               >
                 <span>ok</span>
               </StyledApprove>

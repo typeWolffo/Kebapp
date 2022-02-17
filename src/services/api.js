@@ -8,7 +8,7 @@ class Api {
       baseURL: "http://vps.zer0xday.p4.tiktalik.io/api",
       headers: {
         "Access-Control-Allow-Origin": "*",
-        Authorization: options.access_token,
+        Authorization: `Bearer ${options.token}`,
         "Content-Type": "application/json;charset=UTF-8",
       },
     });

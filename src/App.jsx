@@ -1,22 +1,12 @@
-import { useState } from "react";
 import Login from "./pages/Login/Login";
-import KebappContext from "./contexts/KebappContext";
+import { useAppState } from "./contexts/KebappContext";
 import AuthContext from "./contexts/AuthContext";
+import Home from "./pages/Home/Home";
 
 function App() {
-  const [token, setToken] = useState("");
-  return (
-    <KebappContext token={token}>
-      <AuthContext>
-        <Login setToken={setToken} />
-        {/* <BrowserRouter> */}
-        {/*  <Routes> */}
-        {/*    <Route path="/" element={<Home />} /> */}
-        {/*  </Routes> */}
-        {/* </BrowserRouter> */}
-      </AuthContext>
-    </KebappContext>
-  );
+  const { isAuth } = useAppState();
+
+  return <AuthContext>{isAuth ? <Home /> : <Login />}</AuthContext>;
 }
 
 export default App;
