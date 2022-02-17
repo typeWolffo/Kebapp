@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
-import api from "../../services/api";
 import { useAppState } from "../../contexts/KebappContext";
+import { useApi } from "../../contexts/AuthContext";
 
 const StyledFormWrapper = styled.div`
   display: flex;
@@ -39,27 +39,20 @@ const StyledForm = styled.form`
   }
 `;
 
-function Login() {
+function Login({ setToken }) {
   const { register, handleSubmit } = useForm();
-  const { setCookie } = useAppState();
+  const api = useApi();
+
   const onSubmit = (data) => {
     console.log(data);
-
-    api.post("/auth/login", data).then((response) => {
-      setCookie(JSON.stringify(response.data.data.user));
-    });
+    api.loginUser(data).then((response) => console.log(response));
   };
+
   return (
     <StyledFormWrapper>
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
-        <input
-          type="text"
-          {...register("email", { required: "Field login is required" })}
-        />
-        <input
-          type="password"
-          {...register("password", { required: "Field password is required" })}
-        />
+        <input type="text" {...register("email", { required: "Field login is required" })} />
+        <input type="password" {...register("password", { required: "Field password is required" })} />
         <button type="submit">Login</button>
       </StyledForm>
     </StyledFormWrapper>
