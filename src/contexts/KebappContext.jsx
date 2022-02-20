@@ -8,28 +8,18 @@ export const useAppState = () => useContext(AppContext);
 
 export default function KebappContext(props) {
   const { children } = props;
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuth, setIsAuth] = useState();
 
   const theme = {
-    accentColor: "#66fcf1",
-    backgroundColor: "#565353",
-    fontColor: "#e0dddd",
-    primaryColor: "#3f3f3f",
+    accentColor: "#07CFF6",
+    backgroundColor: "#04131E",
+    errorColor: "#FF3636",
+    fontColor: "#07CFF6",
+    primaryColor: "#0D2534",
   };
 
-  const setCookie = (userCookie) => {
-    document.cookie = userCookie;
-  };
+  const context = useMemo(() => ({ isAuth, setIsAuth }), [isAuth, setIsAuth]);
 
-  const context = useMemo(
-    () => ({
-      isAuthenticated,
-      setCookie,
-      setIsAuthenticated,
-    }),
-    [setCookie, isAuthenticated, setIsAuthenticated]
-  );
-  console.log(isAuthenticated);
   return (
     <AppContext.Provider value={context}>
       <ThemeProvider theme={theme}>{children}</ThemeProvider>
@@ -39,6 +29,7 @@ export default function KebappContext(props) {
 KebappContext.defaultProps = {
   children: null,
 };
+
 KebappContext.propTypes = {
   children: PropTypes.element,
 };

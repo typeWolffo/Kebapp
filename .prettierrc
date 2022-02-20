@@ -3,5 +3,8 @@
     "^[a-z](.*)$",
     "^[./]"
 ],
-  "importOrderSeparation": true
+  "importOrderSeparation": true,
+  "printWidth": 200,
+  "useTabs": false,
+  "endOfLine": "lf"
 }

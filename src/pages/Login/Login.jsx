@@ -1,10 +1,12 @@
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
-import api from "../../services/api";
+import { Link, useNavigate } from "react-router-dom";
 import { useAppState } from "../../contexts/KebappContext";
+import { useApi } from "../../contexts/AuthContext";
 
 const StyledFormWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100vw;
   height: 100vh;
   justify-content: center;
@@ -40,28 +42,28 @@ const StyledForm = styled.form`
 `;
 
 function Login() {
+  const { setIsAuth } = useAppState();
   const { register, handleSubmit } = useForm();
-  const { setCookie, setIsAuthenticated } = useAppState();
+  const api = useApi();
+  const navigate = useNavigate();
+
   const onSubmit = (data) => {
-    api
-      .post("/login", data)
-      .then((response) => setCookie(JSON.stringify(response.data.data.user)))
-      .then(setIsAuthenticated(true));
+    api.loginUser(data).then((response) => {
+      localStorage.setItem("token", response.data.access_token);
+      setIsAuth(true);
+    });
   };
 
   return (
     <StyledFormWrapper>
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
-        <input
-          type="email"
-          {...register("email", { required: "Field login is required" })}
-        />
-        <input
-          type="password"
-          {...register("password", { required: "Field password is required" })}
-        />
+        <input type="text" {...register("email", { required: "Field login is required" })} />
+        <input type="password" {...register("password", { required: "Field password is required" })} />
         <button type="submit">Login</button>
       </StyledForm>
+      <button type="button" onClick={() => navigate("/register")}>
+        Register
+      </button>
     </StyledFormWrapper>
   );
 }

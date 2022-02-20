@@ -1,16 +1,18 @@
 import axios from "axios";
 
 class Api {
-  constructor() {
-    const api = axios.create({
+  instance;
+
+  constructor(options) {
+    this.instance = axios.create({
       baseURL: "http://vps.zer0xday.p4.tiktalik.io/api",
       headers: {
         "Access-Control-Allow-Origin": "*",
+        Authorization: `Bearer ${options.token}`,
         "Content-Type": "application/json;charset=UTF-8",
       },
     });
-    api.interceptors.response.use(this.handleSuccess, this.handleError);
-    this.service = api;
+    this.instance.interceptors.response.use(this.handleSuccess);
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -39,14 +41,20 @@ class Api {
     return Promise.reject(error);
   };
 
+  loginUser = (userCredentials) => {
+    return this.instance.post("/auth/login", userCredentials);
+  };
+
+  registerUser = (userCredentials) => {
+    return this.instance.post("/auth/register", userCredentials);
+  };
+
   get(path, callback) {
-    return this.service
-      .get(path)
-      .then((response) => callback(response.status, response.data));
+    return this.instance.get(path).then((response) => callback(response.status, response.data));
   }
 
   patch(path, payload, callback) {
-    return this.service
+    return this.instance
       .request({
         data: payload,
         method: "PATCH",
@@ -57,7 +65,7 @@ class Api {
   }
 
   post(path, payload) {
-    return this.service.request({
+    return this.instance.request({
       data: payload,
       method: "POST",
       responseType: "json",
@@ -66,4 +74,4 @@ class Api {
   }
 }
 
-export default new Api();
+export default Api;
