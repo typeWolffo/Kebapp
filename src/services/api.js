@@ -45,6 +45,10 @@ class Api {
     return this.instance.post("/auth/login", userCredentials);
   };
 
+  registerUser = (userCredentials) => {
+    return this.instance.post("/auth/register", userCredentials);
+  };
+
   get(path, callback) {
     return this.instance.get(path).then((response) => callback(response.status, response.data));
   }

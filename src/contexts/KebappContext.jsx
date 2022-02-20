@@ -13,6 +13,7 @@ export default function KebappContext(props) {
   const theme = {
     accentColor: "#07CFF6",
     backgroundColor: "#04131E",
+    errorColor: "#FF3636",
     fontColor: "#07CFF6",
     primaryColor: "#0D2534",
   };

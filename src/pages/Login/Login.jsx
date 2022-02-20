@@ -1,10 +1,12 @@
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
+import { Link, useNavigate } from "react-router-dom";
 import { useAppState } from "../../contexts/KebappContext";
 import { useApi } from "../../contexts/AuthContext";
 
 const StyledFormWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100vw;
   height: 100vh;
   justify-content: center;
@@ -43,6 +45,7 @@ function Login() {
   const { setIsAuth } = useAppState();
   const { register, handleSubmit } = useForm();
   const api = useApi();
+  const navigate = useNavigate();
 
   const onSubmit = (data) => {
     api.loginUser(data).then((response) => {
@@ -58,6 +61,9 @@ function Login() {
         <input type="password" {...register("password", { required: "Field password is required" })} />
         <button type="submit">Login</button>
       </StyledForm>
+      <button type="button" onClick={() => navigate("/register")}>
+        Register
+      </button>
     </StyledFormWrapper>
   );
 }
