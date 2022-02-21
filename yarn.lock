@@ -1024,7 +1024,7 @@
     core-js-pure "^3.20.2"
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.10.2", "@babel/runtime@^7.11.2", "@babel/runtime@^7.12.5", "@babel/runtime@^7.15.4", "@babel/runtime@^7.16.3", "@babel/runtime@^7.16.7", "@babel/runtime@^7.7.6", "@babel/runtime@^7.8.4", "@babel/runtime@^7.9.2":
+"@babel/runtime@^7.10.2", "@babel/runtime@^7.10.5", "@babel/runtime@^7.11.2", "@babel/runtime@^7.12.5", "@babel/runtime@^7.15.3", "@babel/runtime@^7.15.4", "@babel/runtime@^7.16.3", "@babel/runtime@^7.16.7", "@babel/runtime@^7.7.6", "@babel/runtime@^7.8.4", "@babel/runtime@^7.9.2":
   version "7.17.2"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.17.2.tgz#66f68591605e59da47523c631416b18508779941"
   integrity sha512-hzeyJyMA1YGdJTuWU0e/j4wKXrU4OMFvY2MSlaI9B7VQb0r5cxTE3EAIS2Q7Tn2RIcDkRvTA/v2JsAEhxe99uw==
@@ -1102,7 +1102,7 @@
   dependencies:
     postcss-value-parser "^4.2.0"
 
-"@emotion/is-prop-valid@^0.8.8":
+"@emotion/is-prop-valid@^0.8.7", "@emotion/is-prop-valid@^0.8.8":
   version "0.8.8"
   resolved "https://registry.yarnpkg.com/@emotion/is-prop-valid/-/is-prop-valid-0.8.8.tgz#db28b1c4368a259b60a97311d6a952d4fd01ac1a"
   integrity sha512-u5WtneEAr5IDG2Wv65yhunPSMLIpuKsbuOktRojfrEiEvRyC85LgPMZI63cr7NUqT8ZIGdSVg8ZKGxIug4lXcA==
@@ -1452,6 +1452,38 @@
   integrity sha512-OAPJUAtgeINhh/TAlUID4QTs53Njm7xzddaVlEs/SXwgtiD1tW22zAB/W1wdqfrpmikgaWQ9Fw6Ws+hsiRm5Vg==
   dependencies:
     "@sinonjs/commons" "^1.7.0"
+
+"@styled-icons/boxicons-logos@^10.38.0":
+  version "10.38.0"
+  resolved "https://registry.yarnpkg.com/@styled-icons/boxicons-logos/-/boxicons-logos-10.38.0.tgz#f51442c49f1a28c61927d6d2f8c1e2d7946faf46"
+  integrity sha512-DpkUi9qV76RsyuzihQhfCho142WCxK/2oUfjcqo6BsP92qxV+4rtS5nfVsmqfnSEef4av+qSeg33fJWDyURyKg==
+  dependencies:
+    "@babel/runtime" "^7.15.3"
+    "@styled-icons/styled-icon" "^10.6.3"
+
+"@styled-icons/boxicons-regular@^10.38.0":
+  version "10.38.0"
+  resolved "https://registry.yarnpkg.com/@styled-icons/boxicons-regular/-/boxicons-regular-10.38.0.tgz#1eb80b4f94a18a9b77b11dee5204aa23378d37ec"
+  integrity sha512-xjhafoa0/EeYtQOyTw+ohuSlBx599t8l8++JH1tQlM0l73dP4icTpF4znYL+HhZeaUe3D+UhrkfWuBBua2w2Qw==
+  dependencies:
+    "@babel/runtime" "^7.15.3"
+    "@styled-icons/styled-icon" "^10.6.3"
+
+"@styled-icons/boxicons-solid@^10.38.0":
+  version "10.38.0"
+  resolved "https://registry.yarnpkg.com/@styled-icons/boxicons-solid/-/boxicons-solid-10.38.0.tgz#bb2a6e21f3412c97ae8029396e3ca9fb107c7658"
+  integrity sha512-uuMtF1R61smQT5r6HIYMHvpVD0XSErXXNQYl5d6lCtMyefd0gIE5Rw+iD9i/RxHFUHNHbvL69LvitCLtNWrSqw==
+  dependencies:
+    "@babel/runtime" "^7.15.3"
+    "@styled-icons/styled-icon" "^10.6.3"
+
+"@styled-icons/styled-icon@^10.6.3":
+  version "10.6.3"
+  resolved "https://registry.yarnpkg.com/@styled-icons/styled-icon/-/styled-icon-10.6.3.tgz#eae0e5e18fd601ac47e821bb9c2e099810e86403"
+  integrity sha512-/A95L3peioLoWFiy+/eKRhoQ9r/oRrN/qzbSX4hXU1nGP2rUXcX3LWUhoBNAOp9Rw38ucc/4ralY427UUNtcGQ==
+  dependencies:
+    "@babel/runtime" "^7.10.5"
+    "@emotion/is-prop-valid" "^0.8.7"
 
 "@surma/rollup-plugin-off-main-thread@^2.2.3":
   version "2.2.3"
@@ -8786,12 +8818,12 @@ workbox-cacheable-response@6.4.2:
   dependencies:
     workbox-core "6.4.2"
 
-workbox-core@6.4.2:
+workbox-core@6.4.2, workbox-core@^6.4.2:
   version "6.4.2"
   resolved "https://registry.yarnpkg.com/workbox-core/-/workbox-core-6.4.2.tgz#f99fd36a211cc01dce90aa7d5f2c255e8fe9d6bc"
   integrity sha512-1U6cdEYPcajRXiboSlpJx6U7TvhIKbxRRerfepAJu2hniKwJ3DHILjpU/zx3yvzSBCWcNJDoFalf7Vgd7ey/rw==
 
-workbox-expiration@6.4.2:
+workbox-expiration@6.4.2, workbox-expiration@^6.4.2:
   version "6.4.2"
   resolved "https://registry.yarnpkg.com/workbox-expiration/-/workbox-expiration-6.4.2.tgz#61613459fd6ddd1362730767618d444c6b9c9139"
   integrity sha512-0hbpBj0tDnW+DZOUmwZqntB/8xrXOgO34i7s00Si/VlFJvvpRKg1leXdHHU8ykoSBd6+F2KDcMP3swoCi5guLw==
@@ -8816,7 +8848,7 @@ workbox-navigation-preload@6.4.2:
   dependencies:
     workbox-core "6.4.2"
 
-workbox-precaching@6.4.2:
+workbox-precaching@6.4.2, workbox-precaching@^6.4.2:
   version "6.4.2"
   resolved "https://registry.yarnpkg.com/workbox-precaching/-/workbox-precaching-6.4.2.tgz#8d87c05d54f32ac140f549faebf3b4d42d63621e"
   integrity sha512-CZ6uwFN/2wb4noHVlALL7UqPFbLfez/9S2GAzGAb0Sk876ul9ukRKPJJ6gtsxfE2HSTwqwuyNVa6xWyeyJ1XSA==
@@ -8844,14 +8876,14 @@ workbox-recipes@6.4.2:
     workbox-routing "6.4.2"
     workbox-strategies "6.4.2"
 
-workbox-routing@6.4.2:
+workbox-routing@6.4.2, workbox-routing@^6.4.2:
   version "6.4.2"
   resolved "https://registry.yarnpkg.com/workbox-routing/-/workbox-routing-6.4.2.tgz#65b1c61e8ca79bb9152f93263c26b1f248d09dcc"
   integrity sha512-0ss/n9PAcHjTy4Ad7l2puuod4WtsnRYu9BrmHcu6Dk4PgWeJo1t5VnGufPxNtcuyPGQ3OdnMdlmhMJ57sSrrSw==
   dependencies:
     workbox-core "6.4.2"
 
-workbox-strategies@6.4.2:
+workbox-strategies@6.4.2, workbox-strategies@^6.4.2:
   version "6.4.2"
   resolved "https://registry.yarnpkg.com/workbox-strategies/-/workbox-strategies-6.4.2.tgz#50c02bf2d116918e1a8052df5f2c1e4103c62d5d"
   integrity sha512-YXh9E9dZGEO1EiPC3jPe2CbztO5WT8Ruj8wiYZM56XqEJp5YlGTtqRjghV+JovWOqkWdR+amJpV31KPWQUvn1Q==
