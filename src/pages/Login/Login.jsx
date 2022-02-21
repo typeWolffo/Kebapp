@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAppState } from "../../contexts/KebappContext";
 import { useApi } from "../../contexts/AuthContext";
 
@@ -11,6 +11,23 @@ const StyledFormWrapper = styled.div`
   height: 100vh;
   justify-content: center;
   align-items: center;
+
+  span {
+    color: ${({ theme }) => theme.accentColor};
+    margin: 10px 0;
+    font-family: Ubuntu, sans-serif;
+    display: flex;
+    align-items: center;
+
+    :before,
+    :after {
+      content: "";
+      width: 50px;
+      height: 1px;
+      margin: 0 5px;
+      background-color: ${({ theme }) => theme.accentColor};
+    }
+  }
 `;
 
 const StyledForm = styled.form`
@@ -41,6 +58,16 @@ const StyledForm = styled.form`
   }
 `;
 
+const StyledRegisterButton = styled.button`
+  background-color: ${({ theme }) => theme.primaryColor};
+  border: 1px solid ${({ theme }) => theme.accentColor};
+  border-radius: 5px;
+  color: ${({ theme }) => theme.fontColor};
+  width: 180px;
+  height: 40px;
+  align-self: center;
+`;
+
 function Login() {
   const { setIsAuth } = useAppState();
   const { register, handleSubmit } = useForm();
@@ -61,9 +88,10 @@ function Login() {
         <input type="password" {...register("password", { required: "Field password is required" })} />
         <button type="submit">Login</button>
       </StyledForm>
-      <button type="button" onClick={() => navigate("/register")}>
+      <span>OR</span>
+      <StyledRegisterButton type="button" onClick={() => navigate("/register")}>
         Register
-      </button>
+      </StyledRegisterButton>
     </StyledFormWrapper>
   );
 }

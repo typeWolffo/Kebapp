@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import "./index.css";
 import "./fonts/Ubuntu/Ubuntu-Regular.ttf";
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import KebappContext from "./contexts/KebappContext";
 
 ReactDOM.render(
@@ -13,3 +14,4 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById("root")
 );
+serviceWorkerRegistration.register();

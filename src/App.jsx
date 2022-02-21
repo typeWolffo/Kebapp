@@ -4,6 +4,7 @@ import { useAppState } from "./contexts/KebappContext";
 import AuthContext from "./contexts/AuthContext";
 import Home from "./pages/Home/Home";
 import Register from "./pages/Register/Register";
+import Navbar from "./components/Navbar/Navbar";
 
 function App() {
   const { isAuth } = useAppState();
@@ -12,9 +13,12 @@ function App() {
     <AuthContext>
       <BrowserRouter>
         {isAuth ? (
-          <Routes>
-            <Route path="/" element={<Home />} />
-          </Routes>
+          <>
+            <Routes>
+              <Route path="/" element={<Home />} />
+            </Routes>
+            <Navbar />
+          </>
         ) : (
           <Routes>
             <Route path="/" element={<Login />} />
