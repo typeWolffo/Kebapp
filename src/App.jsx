@@ -5,10 +5,11 @@ import AuthContext from "./contexts/AuthContext";
 import Home from "./pages/Home/Home";
 import Register from "./pages/Register/Register";
 import Navbar from "./components/Navbar/Navbar";
+import Settings from "./pages/Settings/Settings";
 
 function App() {
   const { isAuth } = useAppState();
-  console.log(isAuth);
+
   return (
     <AuthContext>
       <BrowserRouter>
@@ -16,6 +17,7 @@ function App() {
           <>
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/settings" element={<Settings />} />
             </Routes>
             <Navbar />
           </>
