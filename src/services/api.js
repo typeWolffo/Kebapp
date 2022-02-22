@@ -5,7 +5,7 @@ class Api {
 
   constructor(options) {
     this.instance = axios.create({
-      baseURL: "http://vps.zer0xday.p4.tiktalik.io/api",
+      baseURL: "https://t.me/c/1344224680/306796/api",
       headers: {
         "Access-Control-Allow-Origin": "*",
         Authorization: `Bearer ${options.token}`,
