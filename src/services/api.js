@@ -5,7 +5,7 @@ class Api {
 
   constructor(options) {
     this.instance = axios.create({
-      baseURL: "https://t.me/c/1344224680/306796/api",
+      baseURL: "https://kebapp.com.pl/api",
       headers: {
         "Access-Control-Allow-Origin": "*",
         Authorization: `Bearer ${options.token}`,
@@ -41,13 +41,17 @@ class Api {
     return Promise.reject(error);
   };
 
-  loginUser = (userCredentials) => {
+  loginUser(userCredentials) {
     return this.instance.post("/auth/login", userCredentials);
-  };
+  }
 
-  registerUser = (userCredentials) => {
+  registerUser(userCredentials) {
     return this.instance.post("/auth/register", userCredentials);
-  };
+  }
+
+  createEvent(event) {
+    return this.instance.post("/events", event);
+  }
 
   get(path, callback) {
     return this.instance.get(path).then((response) => callback(response.status, response.data));

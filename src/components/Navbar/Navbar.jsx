@@ -39,9 +39,9 @@ const StyledNavbar = styled.nav`
 function Navbar() {
   return (
     <StyledNavbar>
-      <div>
+      <Link to="create-event">
         <AddIcon />
-      </div>
+      </Link>
       <Link to="/">
         <HomeIcon />
       </Link>

@@ -8,7 +8,8 @@ export const useAppState = () => useContext(AppContext);
 
 export default function KebappContext(props) {
   const { children } = props;
-  const [isAuth, setIsAuth] = useState();
+  const [isAuth, setIsAuth] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const theme = {
     accentColor: "#07CFF6",
@@ -18,7 +19,7 @@ export default function KebappContext(props) {
     primaryColor: "#0D2534",
   };
 
-  const context = useMemo(() => ({ isAuth, setIsAuth }), [isAuth, setIsAuth]);
+  const context = useMemo(() => ({ isAuth, isModalOpen, setIsAuth, setIsModalOpen }), [isAuth, isModalOpen, setIsAuth, setIsModalOpen]);
 
   return (
     <AppContext.Provider value={context}>
