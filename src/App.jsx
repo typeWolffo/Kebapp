@@ -6,6 +6,7 @@ import Home from "./pages/Home/Home";
 import Register from "./pages/Register/Register";
 import Navbar from "./components/Navbar/Navbar";
 import Settings from "./pages/Settings/Settings";
+import CreateEvent from "./pages/CreateEvent/CreateEvent";
 
 function App() {
   const { isAuth } = useAppState();
@@ -18,6 +19,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/settings" element={<Settings />} />
+              <Route path="/create-event" element={<CreateEvent />} />
             </Routes>
             <Navbar />
           </>
