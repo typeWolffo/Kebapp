@@ -6,20 +6,20 @@ import { Link } from "react-router-dom";
 
 const SettingsIcon = styled(Cog)`
   color: ${({ theme }) => theme.accentColor};
-  width: 45px;
-  height: 45px;
+  width: 32px;
+  height: 32px;
   padding: 10px;
 `;
 const AddIcon = styled(MessageSquareAdd)`
   color: ${({ theme }) => theme.accentColor};
-  width: 45px;
-  height: 45px;
+  width: 32px;
+  height: 32px;
   padding: 10px;
 `;
 const HomeIcon = styled(Home)`
   color: ${({ theme }) => theme.accentColor};
-  width: 45px;
-  height: 45px;
+  width: 32px;
+  height: 32px;
   padding: 10px;
 `;
 
@@ -27,10 +27,11 @@ const StyledNavbar = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-around;
+  background-color: ${({ theme }) => theme.backgroundColor};
   flex-wrap: nowrap;
   height: 60px;
   border-top: 1px solid ${({ theme }) => theme.accentColor};
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
