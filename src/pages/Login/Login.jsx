@@ -1,8 +1,10 @@
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { useAppState } from "../../contexts/KebappContext";
-import { useApi } from "../../contexts/AuthContext";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { clearMessage } from "../../slices/message";
+import { loginUser } from "../../slices/auth";
 
 const StyledFormWrapper = styled.div`
   display: flex;
@@ -69,16 +71,23 @@ const StyledRegisterButton = styled.button`
 `;
 
 function Login() {
-  const { setIsAuth } = useAppState();
   const { register, handleSubmit } = useForm();
-  const api = useApi();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const { isLoggedIn } = useSelector((state) => state.auth);
+  const { message } = useSelector((state) => state.message);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(clearMessage());
+  }, [dispatch]);
 
   const onSubmit = (data) => {
-    api.loginUser(data).then((response) => {
-      localStorage.setItem("token", response.data.access_token);
-      setIsAuth(true);
-    });
+    const { email, password } = data;
+    setLoading(true);
+    dispatch(loginUser({ email, password }))
+      .unwrap()
+      .catch(() => setLoading(false));
+    if (isLoggedIn) navigate("/");
   };
 
   return (

@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useApi } from "../../contexts/AuthContext";
 
 const CreateWrapper = styled.div`
   display: flex;
@@ -42,15 +41,15 @@ const CreateWrapper = styled.div`
 
 function CreateEvent() {
   const { register, handleSubmit } = useForm();
-  const api = useApi();
-  const navigate = useNavigate();
+  // const api = useApi();
+  // const navigate = useNavigate();
 
   const onSubmit = ({ location, startAt }) => {
-    const eventData = {
-      location,
-      start_at: new Date(startAt).toISOString(),
-    };
-    api.createEvent(eventData).then((response) => response.status === 200 && navigate("/"));
+    // const eventData = {
+    //   location,
+    //   start_at: new Date(startAt).toISOString(),
+    // };
+    // api.createEvent(eventData).then((response) => response.status === 200 && navigate("/"));
   };
 
   return (

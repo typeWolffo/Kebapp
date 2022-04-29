@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Login from "./pages/Login/Login";
-import { useAppState } from "./contexts/KebappContext";
-import AuthContext from "./contexts/AuthContext";
+import KebappContext from "./contexts/KebappContext";
 import Home from "./pages/Home/Home";
 import Register from "./pages/Register/Register";
 import Navbar from "./components/Navbar/Navbar";
@@ -9,12 +9,12 @@ import Settings from "./pages/Settings/Settings";
 import CreateEvent from "./pages/CreateEvent/CreateEvent";
 
 function App() {
-  const { isAuth } = useAppState();
+  const { isLoggedIn } = useSelector((state) => state.auth);
 
   return (
-    <AuthContext>
+    <KebappContext>
       <BrowserRouter>
-        {isAuth ? (
+        {isLoggedIn ? (
           <>
             <Routes>
               <Route path="/" element={<Home />} />
@@ -30,7 +30,7 @@ function App() {
           </Routes>
         )}
       </BrowserRouter>
-    </AuthContext>
+    </KebappContext>
   );
 }
 

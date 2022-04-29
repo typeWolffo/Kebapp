@@ -1,7 +1,6 @@
 /* eslint-disable prettier/prettier */
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
-import { useApi } from "../../contexts/AuthContext";
 
 const StyledEventsWrapper = styled.div`
   display: flex;
@@ -54,10 +53,10 @@ const StyledApprove = styled.div`
 
 function Home() {
   const [events, setEvents] = useState();
-  const api = useApi();
-  useEffect(() => {
-    api.get("/events", (status, response) => setEvents(response.data.events));
-  }, []);
+  // const api = useApi();
+  // useEffect(() => {
+  //   api.get("/events", (status, response) => setEvents(response.data.events));
+  // }, []);
 
   const weekdays = {
     0: "Niedziela",

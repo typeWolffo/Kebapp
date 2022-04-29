@@ -20,6 +20,7 @@ module.exports = {
     "jsx-a11y/anchor-is-valid": "off",
     "jsx-a11y/click-events-have-key-events": "off",
     "jsx-a11y/interactive-supports-focus": "off",
+    "no-param-reassign": "off",
     "no-unused-vars": "warn",
     "prettier/prettier": "warn",
     "react/jsx-props-no-spreading": "off",
