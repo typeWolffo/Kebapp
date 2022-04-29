@@ -3,10 +3,8 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useAppState } from "../../contexts/KebappContext";
-import { useAuth } from "../../contexts/AuthContext";
 import { clearMessage } from "../../slices/message";
-import { login } from "../../slices/auth";
+import { loginUser } from "../../slices/auth";
 
 const StyledFormWrapper = styled.div`
   display: flex;
@@ -86,7 +84,7 @@ function Login() {
   const onSubmit = (data) => {
     const { email, password } = data;
     setLoading(true);
-    dispatch(login({ email, password }))
+    dispatch(loginUser({ email, password }))
       .unwrap()
       .catch(() => setLoading(false));
     if (isLoggedIn) navigate("/");

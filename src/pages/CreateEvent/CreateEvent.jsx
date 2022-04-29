@@ -42,13 +42,13 @@ const CreateWrapper = styled.div`
 function CreateEvent() {
   const { register, handleSubmit } = useForm();
   // const api = useApi();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const onSubmit = ({ location, startAt }) => {
-    const eventData = {
-      location,
-      start_at: new Date(startAt).toISOString(),
-    };
+    // const eventData = {
+    //   location,
+    //   start_at: new Date(startAt).toISOString(),
+    // };
     // api.createEvent(eventData).then((response) => response.status === 200 && navigate("/"));
   };
 

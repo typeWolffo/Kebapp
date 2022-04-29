@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Login from "./pages/Login/Login";
-import KebappContext, { useAppState } from "./contexts/KebappContext";
+import KebappContext from "./contexts/KebappContext";
 import Home from "./pages/Home/Home";
 import Register from "./pages/Register/Register";
 import Navbar from "./components/Navbar/Navbar";

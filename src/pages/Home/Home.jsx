@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 
 const StyledEventsWrapper = styled.div`

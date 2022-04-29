@@ -1,9 +1,11 @@
+/* eslint-disable camelcase */
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../contexts/AuthContext";
+import { useDispatch } from "react-redux";
+import { registerUser } from "../../slices/auth";
 
 const StyledFormWrapper = styled.div`
   display: flex;
@@ -50,8 +52,9 @@ const StyledForm = styled.form`
 `;
 
 function Register() {
-  const { registerUser } = useAuth();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const validationSchema = Yup.object().shape({
     email: Yup.string().required("Email is required").email("Email is invalid"),
     name: Yup.string().required("Username is required"),
@@ -60,13 +63,16 @@ function Register() {
       .oneOf([Yup.ref("password"), null], "Passwords must match")
       .required("Confirm Password is required"),
   });
+
   const formOptions = { resolver: yupResolver(validationSchema) };
 
   const { register, handleSubmit, formState } = useForm(formOptions);
   const { errors } = formState;
 
   const onSubmit = (data) => {
-    registerUser(data);
+    const { name, email, password, password_confirmation } = data;
+    console.log(data);
+    dispatch(registerUser({ email, name, password, password_confirmation }));
     navigate("/");
   };
 

@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import AuthService from "../services/authService";
 import { setMessage } from "./message";
@@ -5,10 +6,11 @@ import { setMessage } from "./message";
 const userToken = localStorage.getItem("token");
 const auth = new AuthService();
 
-export const register = createAsyncThunk("auth/register", async (userCredentials, thunkApi) => {
+export const registerUser = createAsyncThunk("auth/register", async ({ name, email, password, password_confirmation }, thunkApi) => {
   try {
-    const response = await auth.registerUser(userCredentials);
+    const response = await auth.registerUser({ email, name, password, password_confirmation });
     thunkApi.dispatch(setMessage(response.data.message));
+    console.log(response.data);
     return response.data;
   } catch (error) {
     const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
@@ -17,12 +19,12 @@ export const register = createAsyncThunk("auth/register", async (userCredentials
   }
 });
 
-export const login = createAsyncThunk("auth/login", async ({ email, password }, thunkApi) => {
+export const loginUser = createAsyncThunk("auth/login", async ({ email, password }, thunkApi) => {
   try {
     const data = await auth.loginUser({ email, password });
     return { user: data };
   } catch (error) {
-    const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+    const message = error.response?.data?.message || error.message || error.toString();
     thunkApi.dispatch(setMessage(message));
     return thunkApi.rejectWithValue(undefined);
   }
@@ -31,17 +33,17 @@ export const login = createAsyncThunk("auth/login", async ({ email, password }, 
 const initialState = userToken ? { isLoggedIn: true, userToken } : { isLoggedIn: false, userToken: null };
 const authSlice = createSlice({
   extraReducers: {
-    [register.fulfilled]: (state, action) => {
+    [registerUser.fulfilled]: (state, action) => {
       state.isLoggedIn = false;
     },
-    [register.rejected]: (state, action) => {
+    [registerUser.rejected]: (state, action) => {
       state.isLoggedIn = false;
     },
-    [login.fulfilled]: (state, action) => {
+    [loginUser.fulfilled]: (state, action) => {
       state.isLoggedIn = true;
       state.userToken = action.payload;
     },
-    [login.rejected]: (state, action) => {
+    [loginUser.rejected]: (state, action) => {
       state.isLoggedIn = false;
       state.userToken = null;
     },
