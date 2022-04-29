@@ -8,11 +8,12 @@ class Api {
       baseURL: "https://kebapp.com.pl/api",
       headers: {
         "Access-Control-Allow-Origin": "*",
-        Authorization: `Bearer ${options.token}`,
+        Authorization: `Bearer ${options?.token}`,
         "Content-Type": "application/json;charset=UTF-8",
       },
     });
     this.instance.interceptors.response.use(this.handleSuccess);
+    if (options) console.log(options);
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -40,6 +41,10 @@ class Api {
     }
     return Promise.reject(error);
   };
+
+  getCurrentUser() {
+    return this.instance.post("/auth/me");
+  }
 
   loginUser(userCredentials) {
     return this.instance.post("/auth/login", userCredentials);

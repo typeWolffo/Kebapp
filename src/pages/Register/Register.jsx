@@ -3,7 +3,7 @@ import styled from "styled-components";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
-import { useApi } from "../../contexts/AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 
 const StyledFormWrapper = styled.div`
   display: flex;
@@ -50,7 +50,7 @@ const StyledForm = styled.form`
 `;
 
 function Register() {
-  const api = useApi();
+  const { registerUser } = useAuth();
   const navigate = useNavigate();
   const validationSchema = Yup.object().shape({
     email: Yup.string().required("Email is required").email("Email is invalid"),
@@ -66,7 +66,7 @@ function Register() {
   const { errors } = formState;
 
   const onSubmit = (data) => {
-    api.registerUser(data);
+    registerUser(data);
     navigate("/");
   };
 
