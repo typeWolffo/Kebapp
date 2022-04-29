@@ -28,7 +28,7 @@ export const login = createAsyncThunk("auth/login", async ({ email, password }, 
   }
 });
 
-const initialState = userToken ? { isLoggedIn: true, userToken } : { isLoggedIn: false, user: null };
+const initialState = userToken ? { isLoggedIn: true, userToken } : { isLoggedIn: false, userToken: null };
 const authSlice = createSlice({
   extraReducers: {
     [register.fulfilled]: (state, action) => {
@@ -39,15 +39,16 @@ const authSlice = createSlice({
     },
     [login.fulfilled]: (state, action) => {
       state.isLoggedIn = true;
-      state.user = action.payload.user;
+      state.userToken = action.payload;
     },
     [login.rejected]: (state, action) => {
       state.isLoggedIn = false;
-      state.user = null;
+      state.userToken = null;
     },
   },
   initialState,
   name: "auth",
+  reducers: {},
 });
 const { reducer } = authSlice;
 export default reducer;

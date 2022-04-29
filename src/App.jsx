@@ -1,22 +1,20 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { useSelector } from "react-redux";
 import Login from "./pages/Login/Login";
 import KebappContext, { useAppState } from "./contexts/KebappContext";
-import AuthContext from "./contexts/AuthContext";
 import Home from "./pages/Home/Home";
 import Register from "./pages/Register/Register";
 import Navbar from "./components/Navbar/Navbar";
 import Settings from "./pages/Settings/Settings";
 import CreateEvent from "./pages/CreateEvent/CreateEvent";
-import api from "./services/api";
 
 function App() {
-  const [isAuth, setIsAuth] = useState(false);
+  const { isLoggedIn } = useSelector((state) => state.auth);
 
   return (
     <KebappContext>
       <BrowserRouter>
-        {isAuth ? (
+        {isLoggedIn ? (
           <>
             <Routes>
               <Route path="/" element={<Home />} />

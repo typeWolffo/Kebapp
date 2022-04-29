@@ -85,12 +85,11 @@ function Login() {
 
   const onSubmit = (data) => {
     const { email, password } = data;
-    console.log("login", data);
     setLoading(true);
     dispatch(login({ email, password }))
       .unwrap()
-      .then(() => console.log("logged"))
       .catch(() => setLoading(false));
+    if (isLoggedIn) navigate("/");
   };
 
   return (

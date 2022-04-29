@@ -1,6 +1,7 @@
 import { Telegram } from "@styled-icons/boxicons-logos/Telegram";
 import { Github } from "@styled-icons/boxicons-logos/Github";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const TelegramIcon = styled(Telegram)`
   color: ${({ theme }) => theme.accentColor};
@@ -41,6 +42,11 @@ const StyledIcons = styled.div`
   justify-content: space-around;
 `;
 
+const handleLogout = () => {
+  localStorage.removeItem("token");
+  document.location.assign("/");
+};
+
 function Settings() {
   return (
     <StyledWrapper>
@@ -52,6 +58,9 @@ function Settings() {
         <a href="https://t.me/typeWolffo">
           <TelegramIcon />
         </a>
+        <button type="button" onClick={handleLogout}>
+          IO
+        </button>
       </StyledIcons>
     </StyledWrapper>
   );

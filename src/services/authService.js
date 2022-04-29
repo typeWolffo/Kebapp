@@ -15,7 +15,7 @@ class AuthService {
 
   loginUser(userCredentials) {
     return this.instance.post("/login", userCredentials).then((response) => {
-      if (response.data.token) localStorage.setItem("token", response.data.token);
+      if (response.data.access_token) localStorage.setItem("token", response.data.access_token);
       return response.data;
     });
   }
