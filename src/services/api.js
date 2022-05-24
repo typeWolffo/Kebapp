@@ -4,6 +4,7 @@ class Api {
   instance;
 
   constructor(options) {
+    console.log(options);
     this.instance = axios.create({
       baseURL: "https://kebapp.com.pl/api",
       headers: {
@@ -13,7 +14,6 @@ class Api {
       },
     });
     this.instance.interceptors.response.use(this.handleSuccess);
-    if (options) console.log(options);
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -44,14 +44,6 @@ class Api {
 
   getCurrentUser() {
     return this.instance.post("/auth/me");
-  }
-
-  loginUser(userCredentials) {
-    return this.instance.post("/auth/login", userCredentials);
-  }
-
-  registerUser(userCredentials) {
-    return this.instance.post("/auth/register", userCredentials);
   }
 
   createEvent(event) {

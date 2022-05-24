@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { createEvent } from "../../slices/event";
+import message from "../../slices/message";
 
 const CreateWrapper = styled.div`
   display: flex;
@@ -41,15 +44,14 @@ const CreateWrapper = styled.div`
 
 function CreateEvent() {
   const { register, handleSubmit } = useForm();
-  // const api = useApi();
-  // const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const onSubmit = ({ location, startAt }) => {
-    // const eventData = {
-    //   location,
-    //   start_at: new Date(startAt).toISOString(),
-    // };
-    // api.createEvent(eventData).then((response) => response.status === 200 && navigate("/"));
+    const eventData = {
+      location,
+      start_at: new Date(startAt).toISOString(),
+    };
+    dispatch(createEvent(eventData));
   };
 
   return (
