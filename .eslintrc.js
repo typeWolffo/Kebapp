@@ -4,8 +4,13 @@ module.exports = {
     es2021: true,
     jest: true,
   },
-  extends: ["plugin:react/recommended", "airbnb", "plugin:prettier/recommended", "plugin:import/recommended"],
-  ignorePatterns: ["/node_modules", ".next", "jest.config.js"],
+  extends: [
+    "plugin:react/recommended",
+    "airbnb",
+    "plugin:prettier/recommended",
+    "plugin:import/recommended",
+  ],
+  ignorePatterns: ["/node_modules", "jest.config.js"],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -15,6 +20,11 @@ module.exports = {
   },
   plugins: ["react", "prettier", "jest", "import"],
   rules: {
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      { js: "never", jsx: "never", ts: "never", tsx: "never" },
+    ],
     "import/no-named-as-default": "off",
     "import/no-named-as-default-member": "off",
     "jsx-a11y/anchor-is-valid": "off",
@@ -26,6 +36,10 @@ module.exports = {
     "react/jsx-props-no-spreading": "off",
     "react/prop-types": "warn",
     "react/react-in-jsx-scope": "off",
-    "sort-keys": ["error", "asc", { caseSensitive: true, minKeys: 2, natural: false }],
+    "sort-keys": [
+      "error",
+      "asc",
+      { caseSensitive: true, minKeys: 2, natural: false },
+    ],
   },
 };

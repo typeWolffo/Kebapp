@@ -1,9 +1,13 @@
 import axios from "axios";
 
+type Options = {
+  token: string
+}
+
 class Api {
   instance;
 
-  constructor(options) {
+  constructor(options: Options) {
     console.log(options);
     this.instance = axios.create({
       baseURL: "https://kebapp.com.pl/api",
@@ -17,30 +21,9 @@ class Api {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  handleSuccess(response) {
+  handleSuccess(response: any) {
     return response;
   }
-
-  // eslint-disable-next-line class-methods-use-this
-  redirectTo = (document, path) => {
-    // eslint-disable-next-line no-param-reassign
-    document.location = path;
-  };
-
-  handleError = (error) => {
-    switch (error.response.status) {
-      case 401:
-        this.redirectTo(document, "/");
-        break;
-      case 404:
-        this.redirectTo(document, "https://http.cat/404");
-        break;
-      default:
-        this.redirectTo(document, "https://http.cat/500");
-        break;
-    }
-    return Promise.reject(error);
-  };
 
   getCurrentUser() {
     return this.instance.post("/auth/me");

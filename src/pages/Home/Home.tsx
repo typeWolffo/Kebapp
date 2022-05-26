@@ -52,7 +52,7 @@ const StyledApprove = styled.div`
 `;
 
 function Home() {
-  const [events, setEvents] = useState();
+  const [events, setEvents] = useState([]);
   // const api = useApi();
   // useEffect(() => {
   //   api.get("/events", (status, response) => setEvents(response.data.events));

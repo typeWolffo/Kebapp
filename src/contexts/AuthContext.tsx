@@ -1,6 +1,5 @@
-import React, { createContext, useContext, useMemo } from "react";
+import React, { createContext, ReactNode, useContext, useMemo } from "react";
 
-import PropTypes from "prop-types";
 import AuthService from "../services/authService";
 import Api from "../services/api";
 
@@ -8,7 +7,12 @@ const ApiContext = createContext({});
 
 export const useAuth = () => useContext(ApiContext);
 
-function AuthContext({ children }) {
+type Props = {
+  children: ReactNode
+}
+
+function AuthContext(props: Props) {
+  const {children} = props;
   const currentToken = localStorage.getItem("token");
   const authService = new AuthService();
   const apiService = new Api(currentToken);
@@ -21,11 +25,9 @@ function AuthContext({ children }) {
     [currentToken]
   );
 
-  return <ApiContext.Provider value={memoizedAuth}>{children}</ApiContext.Provider>;
+  return (
+    <ApiContext.Provider value={memoizedAuth}>{children}</ApiContext.Provider>
+  );
 }
-
-AuthContext.propTypes = {
-  children: PropTypes.element.isRequired,
-};
 
 export default AuthContext;

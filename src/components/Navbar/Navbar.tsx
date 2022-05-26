@@ -1,8 +1,8 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { Cog } from "@styled-icons/boxicons-regular/Cog";
 import { MessageSquareAdd } from "@styled-icons/boxicons-regular/MessageSquareAdd";
 import { Home } from "@styled-icons/boxicons-regular/Home";
-import { Link } from "react-router-dom";
 
 const SettingsIcon = styled(Cog)`
   color: ${({ theme }) => theme.accentColor};
