@@ -5,17 +5,23 @@ import Api from "../services/api";
 
 const ApiContext = createContext({});
 
-export const useAuth = () => useContext(ApiContext);
+export const useAuth = () => {
+  const apiContext = useContext(ApiContext);
+
+  if (!apiContext) throw new Error("useApi must be used inside ApiContext provider");
+
+  return apiContext;
+};
 
 type Props = {
-  children: ReactNode
-}
+  children: ReactNode;
+};
 
 function AuthContext(props: Props) {
-  const {children} = props;
+  const { children } = props;
   const currentToken = localStorage.getItem("token");
   const authService = new AuthService();
-  const apiService = new Api(currentToken);
+  const apiService = new Api();
 
   const memoizedAuth = useMemo(
     () => ({
@@ -25,9 +31,7 @@ function AuthContext(props: Props) {
     [currentToken]
   );
 
-  return (
-    <ApiContext.Provider value={memoizedAuth}>{children}</ApiContext.Provider>
-  );
+  return <ApiContext.Provider value={memoizedAuth}>{children}</ApiContext.Provider>;
 }
 
 export default AuthContext;

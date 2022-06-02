@@ -1,6 +1,8 @@
-/* eslint-disable prettier/prettier */
-import { useState } from "react";
+import { useState, ReactNode, useEffect } from "react";
 import styled from "styled-components";
+import { AxiosResponse } from "axios";
+import { useAuth } from "../../contexts/AuthContext";
+import api from "../../services/api";
 
 const StyledEventsWrapper = styled.div`
   display: flex;
@@ -51,14 +53,23 @@ const StyledApprove = styled.div`
   align-items: center;
 `;
 
+type Weekdays = {
+  0: string;
+  1: string;
+  2: string;
+  3: string;
+  4: string;
+  5: string;
+  6: string;
+};
+
 function Home() {
   const [events, setEvents] = useState([]);
-  // const api = useApi();
-  // useEffect(() => {
-  //   api.get("/events", (status, response) => setEvents(response.data.events));
-  // }, []);
+  useEffect(() => {
+    // get events
+  }, []);
 
-  const weekdays = {
+  const weekdays: Weekdays = {
     0: "Niedziela",
     1: "Poniedziałek",
     2: "Wtorek",
@@ -68,7 +79,7 @@ function Home() {
     6: "Sobota",
   };
 
-  const getKebsDate = (event) => {
+  const getKebsDate = (event: string | number | Date) => {
     const date = new Date(event);
 
     return {
@@ -83,25 +94,24 @@ function Home() {
     <StyledEventsWrapper>
       {events &&
         events.map(
-          // eslint-disable-next-line no-unused-vars
-          ({ id, location, start_at: startAt, created_at: createdAt }) => (
+          ({ id, location, start_at: startAt, created_at: createdAt }): ReactNode => (
             <StyledEvent key={createdAt}>
               <StyledEventDetails>
                 <span>{location}</span>
-                <span>{`${weekdays[getKebsDate(startAt).day]} (${getKebsDate(startAt).date})`}</span>
+                <span>{`${weekdays[getKebsDate(startAt).day as unknown as keyof Weekdays]} (${getKebsDate(startAt).date})`}</span>
                 <span>{`${getKebsDate(startAt).hour}:${getKebsDate(startAt).minute.padStart(2, "0")}`}</span>
               </StyledEventDetails>
-              <StyledApprove
-              // onClick={() =>
-              //   api
-              //     .post(`/events/${id}/members`, {
-              //       user_id: user.id,
-              //     })
-              //     .then((response) => console.log(response))
-              // }
-              >
-                <span>ok</span>
-              </StyledApprove>
+              {/*<StyledApprove*/}
+              {/*  onClick={() =>*/}
+              {/*    api*/}
+              {/*      .post(`/events/${id}/members`, {*/}
+              {/*        user_id: user.id,*/}
+              {/*      })*/}
+              {/*      .then((response: AxiosResponse) => console.log(response))*/}
+              {/*  }*/}
+              {/*>*/}
+              {/*  <span>ok</span>*/}
+              {/*</StyledApprove>*/}
             </StyledEvent>
           )
         )}

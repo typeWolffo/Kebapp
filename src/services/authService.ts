@@ -13,14 +13,14 @@ class AuthService {
     });
   }
 
-  loginUser(userCredentials) {
+  loginUser(userCredentials: { email: string; password: string }) {
     return this.instance.post("/login", userCredentials).then((response) => {
       if (response.data.access_token) localStorage.setItem("token", response.data.access_token);
       return response.data.access_token;
     });
   }
 
-  registerUser(userCredentials) {
+  registerUser(userCredentials: { email: string; name: string; password: string; password_confirmation: string }) {
     return this.instance.post("/register", userCredentials);
   }
 }

@@ -1,9 +1,10 @@
 import styled from "styled-components";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createEvent } from "../../slices/event";
 import message from "../../slices/message";
+import { EventDataType } from "../../types/EventType";
 
 const CreateWrapper = styled.div`
   display: flex;
@@ -43,13 +44,13 @@ const CreateWrapper = styled.div`
 `;
 
 function CreateEvent() {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm<EventDataType>();
   const dispatch = useDispatch();
 
-  const onSubmit = ({ location, startAt }) => {
+  const onSubmit: SubmitHandler<EventDataType> = (data) => {
     const eventData = {
-      location,
-      start_at: new Date(startAt).toISOString(),
+      location: data.location,
+      start_at: new Date(String(data.startAt)).toISOString(),
     };
     dispatch(createEvent(eventData));
   };

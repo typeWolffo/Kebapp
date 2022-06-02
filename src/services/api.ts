@@ -1,27 +1,22 @@
-import axios from "axios";
-
-type Options = {
-  token: string
-}
+import axios, { AxiosResponse } from "axios";
+import { EventDataType } from "../types/EventType";
 
 class Api {
   instance;
 
-  constructor(options: Options) {
-    console.log(options);
+  constructor() {
     this.instance = axios.create({
       baseURL: "https://kebapp.com.pl/api",
       headers: {
         "Access-Control-Allow-Origin": "*",
-        Authorization: `Bearer ${options?.token}`,
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
         "Content-Type": "application/json;charset=UTF-8",
       },
     });
     this.instance.interceptors.response.use(this.handleSuccess);
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  handleSuccess(response: any) {
+  handleSuccess(response: AxiosResponse) {
     return response;
   }
 
@@ -29,32 +24,8 @@ class Api {
     return this.instance.post("/auth/me");
   }
 
-  createEvent(event) {
+  createEvent(event: EventDataType) {
     return this.instance.post("/events", event);
-  }
-
-  get(path, callback) {
-    return this.instance.get(path).then((response) => callback(response.status, response.data));
-  }
-
-  patch(path, payload, callback) {
-    return this.instance
-      .request({
-        data: payload,
-        method: "PATCH",
-        responseType: "json",
-        url: path,
-      })
-      .then((response) => callback(response.status, response.data));
-  }
-
-  post(path, payload) {
-    return this.instance.request({
-      data: payload,
-      method: "POST",
-      responseType: "json",
-      url: path,
-    });
   }
 }
 
