@@ -10,7 +10,7 @@ module.exports = {
     "plugin:prettier/recommended",
     "plugin:import/recommended",
   ],
-  ignorePatterns: ["/node_modules", "jest.config.js"],
+  ignorePatterns: ["/node_modules", ".next", "jest.config.js"],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -20,17 +20,11 @@ module.exports = {
   },
   plugins: ["react", "prettier", "jest", "import"],
   rules: {
-    "import/extensions": [
-      "error",
-      "ignorePackages",
-      { js: "never", jsx: "never", ts: "never", tsx: "never" },
-    ],
     "import/no-named-as-default": "off",
     "import/no-named-as-default-member": "off",
     "jsx-a11y/anchor-is-valid": "off",
     "jsx-a11y/click-events-have-key-events": "off",
     "jsx-a11y/interactive-supports-focus": "off",
-    "no-param-reassign": "off",
     "no-unused-vars": "warn",
     "prettier/prettier": "warn",
     "react/jsx-props-no-spreading": "off",

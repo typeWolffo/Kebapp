@@ -17,6 +17,7 @@
     "@types/react-dom": "18.0.0",
     "@typescript-eslint/eslint-plugin": "5.26.0",
     "axios": "0.27.2",
+    "eslint-plugin-react": "7.30.0",
     "polished": "4.2.2",
     "react": "18.1.0",
     "react-dom": "18.1.0",
@@ -41,12 +42,6 @@
     "eject": "react-scripts eject",
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
     "lint:fix": "eslint . --ext .ts,.tsx,.js,.jsx --fix"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [
@@ -78,7 +73,6 @@
     "eslint-plugin-jest": "26.1.5",
     "eslint-plugin-jsx-a11y": "6.5.1",
     "eslint-plugin-prettier": "4.0.0",
-    "eslint-plugin-react": "7.29.4",
     "eslint-plugin-react-hooks": "4.5.0",
     "prettier": "2.6.2"
   }

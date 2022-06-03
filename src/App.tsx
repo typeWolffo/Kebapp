@@ -7,9 +7,10 @@ import Register from "./pages/Register/Register";
 import Navbar from "./components/Navbar/Navbar";
 import Settings from "./pages/Settings/Settings";
 import CreateEvent from "./pages/CreateEvent/CreateEvent";
+import { RootState } from "./store/store";
 
 function App() {
-  const { isLoggedIn } = useSelector((state) => state.auth);
+  const { isLoggedIn } = useSelector((state: RootState) => state.auth);
 
   return (
     <KebappContext>

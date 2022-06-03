@@ -6,6 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { registerUser } from "../../slices/auth";
+import { RegisterUserDataType } from "../../types/RegisterUserDataType";
 
 const StyledFormWrapper = styled.div`
   display: flex;
@@ -66,10 +67,10 @@ function Register() {
 
   const formOptions = { resolver: yupResolver(validationSchema) };
 
-  const { register, handleSubmit, formState } = useForm(formOptions);
+  const { register, handleSubmit, formState } = useForm<RegisterUserDataType>(formOptions);
   const { errors } = formState;
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: RegisterUserDataType) => {
     const { name, email, password, password_confirmation } = data;
     console.log(data);
     dispatch(registerUser({ email, name, password, password_confirmation }));
