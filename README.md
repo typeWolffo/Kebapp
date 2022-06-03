@@ -1,6 +1,6 @@
 # Requirements 
 
-- Node 16.14.0 (project is locked down in this node version - `nvm use` in your terminal; [NVM installation](https://github.com/nvm-sh/nvm))
+- Node 16.15.0 (project is locked down in this node version - `nvm use` in your terminal; [NVM installation](https://github.com/nvm-sh/nvm))
 - yarn - after setting the version of the node: `npm i -g yarn`
 
 ## Setup
