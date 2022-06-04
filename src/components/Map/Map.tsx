@@ -1,47 +1,69 @@
 import '@tomtom-international/web-sdk-maps/dist/maps.css'
 import tt from '@tomtom-international/web-sdk-maps'
+import axios from 'axios'
 import { useEffect, useRef, useState } from 'react'
 
-const MAX_ZOOM = 17
-
 function Map() {
-  const [mapLongitude, setMapLongitude] = useState(-121.91599)
-  const [mapLatitude, setMapLatitude] = useState(37.36765)
-  const [mapZoom, setMapZoom] = useState(13)
-  const [map, setMap] = useState({})
+  const [mapLongitude, setMapLongitude] = useState<number>(0)
+  const [mapLatitude, setMapLatitude] = useState<number>(0)
+  const [kebabPoints, setKebabPoints] = useState([])
 
   const mapElement = useRef<HTMLDivElement | null>(null)
-
-  const increaseZoom = () => {
-    if (mapZoom < MAX_ZOOM) {
-      setMapZoom(mapZoom + 1)
+  useEffect(() => {
+    return () => {
+      axios
+        .get(
+          `https://api.tomtom.com/search/2/search/kebab.json?countrySet=pl-PL&lat=${mapLatitude}&lon=${mapLongitude}&radius=5000&minFuzzyLevel=1&maxFuzzyLevel=2&categorySet=7315&view=Unified&relatedPois=child&key=bMuk0LLJun9LTvbA5ts0poYsD3y6qfh9`
+        )
+        .then((response) => setKebabPoints(response.data.results))
     }
+  }, [mapLatitude, mapLongitude])
+
+  console.log(kebabPoints)
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition((position) => {
+      setMapLatitude(position.coords.latitude)
+      setMapLongitude(position.coords.longitude)
+    })
+  } else {
+    throw new Error('no coords here!')
   }
 
-  const decreaseZoom = () => {
-    if (mapZoom > 1) {
-      setMapZoom(mapZoom - 1)
-    }
-  }
+  const addMarker = (map: tt.Map) => {
+    const markers: tt.Marker[] = []
+    kebabPoints.forEach((point) => {
+      // @ts-ignore
+      const popup = new tt.Popup({ anchor: 'bottom', offset: 45 }).setText(point.poi.name)
 
-  // const updateMap = () => {
-  //   map.setCenter([parseFloat(String(mapLongitude)), parseFloat(String(mapLatitude))])
-  //   map.setZoom(mapZoom)
-  // }
+      const marker = new tt.Marker({
+        color: '#ff0000',
+        width: '40px',
+        height: '40px',
+      })
+        // @ts-ignore
+        .setLngLat([point.position.lon, point.position.lat])
+        .setPopup(popup)
+        .addTo(map)
+      markers.push(marker)
+    })
+    return markers
+  }
 
   useEffect(() => {
-    let ttMap = tt.map({
+    let map = tt.map({
       key: 'bMuk0LLJun9LTvbA5ts0poYsD3y6qfh9',
       // @ts-ignore
       container: mapElement.current,
       center: [mapLongitude, mapLatitude],
-      zoom: mapZoom,
+      zoom: 13,
     })
-    setMap(ttMap)
-    return () => ttMap.remove()
-  }, [])
+    addMarker(map)
 
-  return <div ref={mapElement} style={{ height: '500px', width: '500px' }}></div>
+    return () => map.remove()
+  }, [mapLatitude, mapLongitude])
+
+  return <div ref={mapElement} style={{ height: '500px', width: '100%' }}></div>
 }
 
 export default Map
