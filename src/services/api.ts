@@ -1,32 +1,32 @@
-import axios, { AxiosResponse } from "axios";
-import { EventDataType } from "../types/EventType";
+import axios, { AxiosResponse } from 'axios'
+import { EventDataType } from '../types/EventType'
 
 class Api {
-  instance;
+  instance
 
   constructor() {
     this.instance = axios.create({
-      baseURL: "https://kebapp.com.pl/api",
+      baseURL: 'https://kebapp.com.pl/api',
       headers: {
-        "Access-Control-Allow-Origin": "*",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-        "Content-Type": "application/json;charset=UTF-8",
+        'Access-Control-Allow-Origin': '*',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json;charset=UTF-8',
       },
-    });
-    this.instance.interceptors.response.use(this.handleSuccess);
+    })
+    this.instance.interceptors.response.use(this.handleSuccess)
   }
 
   handleSuccess(response: AxiosResponse) {
-    return response;
+    return response
   }
 
   getCurrentUser() {
-    return this.instance.post("/auth/me");
+    return this.instance.post('/auth/me')
   }
 
   createEvent(event: EventDataType) {
-    return this.instance.post("/events", event);
+    return this.instance.post('/events', event)
   }
 }
 
-export default Api;
+export default Api

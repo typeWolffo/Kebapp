@@ -1,12 +1,12 @@
 /* eslint-disable camelcase */
-import { useForm } from "react-hook-form";
-import styled from "styled-components";
-import * as Yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { registerUser } from "../../slices/auth";
-import { RegisterUserDataType } from "../../types/RegisterUserDataType";
+import { useForm } from 'react-hook-form'
+import styled from 'styled-components'
+import * as Yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { registerUser } from '../../slices/auth'
+import { RegisterUserDataType } from '../../types/RegisterUserDataType'
 
 const StyledFormWrapper = styled.div`
   display: flex;
@@ -14,7 +14,7 @@ const StyledFormWrapper = styled.div`
   height: 100vh;
   justify-content: center;
   align-items: center;
-`;
+`
 
 const StyledForm = styled.form`
   display: flex;
@@ -50,49 +50,49 @@ const StyledForm = styled.form`
     align-self: center;
     margin-top: 20px;
   }
-`;
+`
 
 function Register() {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string().required("Email is required").email("Email is invalid"),
-    name: Yup.string().required("Username is required"),
-    password: Yup.string().min(6, "Password must be at least 6 characters").required("Password is required"),
+    email: Yup.string().required('Email is required').email('Email is invalid'),
+    name: Yup.string().required('Username is required'),
+    password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
     password_confirmation: Yup.string()
-      .oneOf([Yup.ref("password"), null], "Passwords must match")
-      .required("Confirm Password is required"),
-  });
+      .oneOf([Yup.ref('password'), null], 'Passwords must match')
+      .required('Confirm Password is required'),
+  })
 
-  const formOptions = { resolver: yupResolver(validationSchema) };
+  const formOptions = { resolver: yupResolver(validationSchema) }
 
-  const { register, handleSubmit, formState } = useForm<RegisterUserDataType>(formOptions);
-  const { errors } = formState;
+  const { register, handleSubmit, formState } = useForm<RegisterUserDataType>(formOptions)
+  const { errors } = formState
 
   const onSubmit = (data: RegisterUserDataType) => {
-    const { name, email, password, password_confirmation } = data;
-    console.log(data);
-    dispatch(registerUser({ email, name, password, password_confirmation }));
-    navigate("/");
-  };
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    const { name, email, password, password_confirmation } = data
+    dispatch(registerUser({ email, name, password, password_confirmation }))
+    navigate('/')
+  }
 
   return (
     <StyledFormWrapper>
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
-        <input type="text" placeholder="Username" {...register("name")} />
+        <input type="text" placeholder="Username" {...register('name')} />
         <p>{errors.name?.message}</p>
-        <input type="text" placeholder="Email" {...register("email")} />
+        <input type="text" placeholder="Email" {...register('email')} />
         <p>{errors.email?.message}</p>
-        <input type="password" placeholder="Password" {...register("password")} />
+        <input type="password" placeholder="Password" {...register('password')} />
         <p>{errors.password?.message}</p>
 
-        <input type="password" placeholder="Confirm password" {...register("password_confirmation")} />
+        <input type="password" placeholder="Confirm password" {...register('password_confirmation')} />
         <p>{errors.password_confirmation?.message}</p>
 
         <button type="submit">Register</button>
       </StyledForm>
     </StyledFormWrapper>
-  );
+  )
 }
-export default Register;
+export default Register

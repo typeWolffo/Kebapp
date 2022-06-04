@@ -1,12 +1,12 @@
-import { useForm } from "react-hook-form";
-import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { clearMessage } from "../../slices/message";
-import { loginUser } from "../../slices/auth";
-import { RootState, useAppDispatch } from "../../store/store";
-import { LoginUserDataType } from "../../types/LoginUserDataType";
+import { useForm } from 'react-hook-form'
+import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { clearMessage } from '../../slices/message'
+import { loginUser } from '../../slices/auth'
+import { RootState, useAppDispatch } from '../../store/store'
+import { LoginUserDataType } from '../../types/LoginUserDataType'
 
 const StyledFormWrapper = styled.div`
   display: flex;
@@ -25,14 +25,14 @@ const StyledFormWrapper = styled.div`
 
     :before,
     :after {
-      content: "";
+      content: '';
       width: 50px;
       height: 1px;
       margin: 0 5px;
       background-color: ${({ theme }) => theme.accentColor};
     }
   }
-`;
+`
 
 const StyledForm = styled.form`
   display: flex;
@@ -60,7 +60,7 @@ const StyledForm = styled.form`
     height: 45px;
     align-self: center;
   }
-`;
+`
 
 const StyledRegisterButton = styled.button`
   background-color: ${({ theme }) => theme.primaryColor};
@@ -70,43 +70,44 @@ const StyledRegisterButton = styled.button`
   width: 180px;
   height: 40px;
   align-self: center;
-`;
+`
 
 function Login() {
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
 
-  const { register, handleSubmit } = useForm<LoginUserDataType>();
+  const { register, handleSubmit } = useForm<LoginUserDataType>()
 
-  const [loading, setLoading] = useState(false);
+  // eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
+  const [loading, setLoading] = useState(false)
 
-  const { isLoggedIn } = useSelector((state: RootState) => state.auth);
+  const { isLoggedIn } = useSelector((state: RootState) => state.auth)
 
   useEffect(() => {
-    dispatch(clearMessage());
-  }, [dispatch]);
+    dispatch(clearMessage())
+  }, [dispatch])
 
   const onSubmit = (data: LoginUserDataType) => {
-    const { email, password } = data;
-    setLoading(true);
+    const { email, password } = data
+    setLoading(true)
     dispatch(loginUser({ email, password }))
       .unwrap()
-      .catch(() => setLoading(false));
-    if (isLoggedIn) navigate("/");
-  };
+      .catch(() => setLoading(false))
+    if (isLoggedIn) navigate('/')
+  }
 
   return (
     <StyledFormWrapper>
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
-        <input type="text" {...register("email", { required: "Field login is required" })} />
-        <input type="password" {...register("password", { required: "Field password is required" })} />
+        <input type="text" {...register('email', { required: 'Field login is required' })} />
+        <input type="password" {...register('password', { required: 'Field password is required' })} />
         <button type="submit">Login</button>
       </StyledForm>
       <span>OR</span>
-      <StyledRegisterButton type="button" onClick={() => navigate("/register")}>
+      <StyledRegisterButton type="button" onClick={() => navigate('/register')}>
         Register
       </StyledRegisterButton>
     </StyledFormWrapper>
-  );
+  )
 }
-export default Login;
+export default Login

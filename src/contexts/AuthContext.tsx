@@ -1,37 +1,38 @@
-import React, { createContext, ReactNode, useContext, useMemo } from "react";
+import React, { createContext, ReactNode, useContext, useMemo } from 'react'
 
-import AuthService from "../services/authService";
-import Api from "../services/api";
+import AuthService from '../services/authService'
+import Api from '../services/api'
 
-const ApiContext = createContext({});
+const ApiContext = createContext({})
 
 export const useAuth = () => {
-  const apiContext = useContext(ApiContext);
+  const apiContext = useContext(ApiContext)
 
-  if (!apiContext) throw new Error("useApi must be used inside ApiContext provider");
+  if (!apiContext) throw new Error('useApi must be used inside ApiContext provider')
 
-  return apiContext;
-};
+  return apiContext
+}
 
 type Props = {
-  children: ReactNode;
-};
+  children: ReactNode
+}
 
 function AuthContext(props: Props) {
-  const { children } = props;
-  const currentToken = localStorage.getItem("token");
-  const authService = new AuthService();
-  const apiService = new Api();
+  const { children } = props
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const authService = new AuthService()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const apiService = new Api()
 
   const memoizedAuth = useMemo(
     () => ({
       apiService,
       authService,
     }),
-    [currentToken]
-  );
+    [apiService, authService]
+  )
 
-  return <ApiContext.Provider value={memoizedAuth}>{children}</ApiContext.Provider>;
+  return <ApiContext.Provider value={memoizedAuth}>{children}</ApiContext.Provider>
 }
 
-export default AuthContext;
+export default AuthContext
