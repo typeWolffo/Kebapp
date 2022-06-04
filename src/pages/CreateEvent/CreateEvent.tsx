@@ -1,10 +1,8 @@
-import styled from "styled-components";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { createEvent } from "../../slices/event";
-import message from "../../slices/message";
-import { EventDataType } from "../../types/EventType";
+import styled from 'styled-components'
+import { useForm, SubmitHandler } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
+import { createEvent } from '../../slices/event'
+import { EventDataType } from '../../types/EventType'
 
 const CreateWrapper = styled.div`
   display: flex;
@@ -41,34 +39,34 @@ const CreateWrapper = styled.div`
       align-self: center;
     }
   }
-`;
+`
 
 function CreateEvent() {
-  const { register, handleSubmit } = useForm<EventDataType>();
-  const dispatch = useDispatch();
+  const { register, handleSubmit } = useForm<EventDataType>()
+  const dispatch = useDispatch()
 
   const onSubmit: SubmitHandler<EventDataType> = (data) => {
     const eventData = {
       location: data.location,
       start_at: new Date(String(data.startAt)).toISOString(),
-    };
-    dispatch(createEvent(eventData));
-  };
+    }
+    dispatch(createEvent(eventData))
+  }
 
   return (
     <CreateWrapper>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <input type="text" {...register("location")} list="kebsOptions" placeholder="Jaka miejscuwa wariacie" />
+        <input type="text" {...register('location')} list="kebsOptions" placeholder="Jaka miejscuwa wariacie" />
         <datalist id="kebsOptions">
           <option value="Nazar">Nazar</option>
           <option value="Diamond">Diamond</option>
           <option value="Diamond Bielsko">Diamond Bielsko</option>
         </datalist>
-        <input type="datetime-local" {...register("startAt")} />
+        <input type="datetime-local" {...register('startAt')} />
         <button type="submit">Gituwa</button>
       </form>
     </CreateWrapper>
-  );
+  )
 }
 
-export default CreateEvent;
+export default CreateEvent
