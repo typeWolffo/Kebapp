@@ -3,6 +3,13 @@
   src: local('Ubuntu'), url('./fonts/Ubuntu/Ubuntu-Regular.ttf') format('truetype');
 }
 
+#marker {
+  background-image: url("../public/icon-192x192.png");
+  background-size: cover;
+  width: 40px;
+  height: 40px;
+}
+
 body,
 html {
   background-color: #04131e;
