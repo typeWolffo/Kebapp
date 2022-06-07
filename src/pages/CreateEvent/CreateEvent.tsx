@@ -1,6 +1,8 @@
+import { useEffect } from 'react'
 import styled from 'styled-components'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
+import Modal from '../../components/Modal/Modal'
 import { createEvent } from '../../slices/event'
 import { EventDataType } from '../../types/EventType'
 
@@ -21,12 +23,16 @@ const CreateWrapper = styled.div`
     input {
       height: 45px;
       margin: 10px 0;
+      padding: 0 10px;
       border-radius: 5px;
       border-color: ${({ theme }) => theme.accentColor};
       background-color: transparent;
       color: ${({ theme }) => theme.fontColor};
       outline: none;
       border-style: solid;
+    }
+    input[type='datetime-local']::-webkit-calendar-picker-indicator {
+      display: none !important;
     }
 
     button {
@@ -42,7 +48,7 @@ const CreateWrapper = styled.div`
 `
 
 function CreateEvent() {
-  const { register, handleSubmit } = useForm<EventDataType>()
+  const { register, handleSubmit, setValue } = useForm<EventDataType>()
   const dispatch = useDispatch()
 
   const onSubmit: SubmitHandler<EventDataType> = (data) => {
@@ -52,6 +58,14 @@ function CreateEvent() {
     }
     dispatch(createEvent(eventData))
   }
+
+  const locationFromMap = window.sessionStorage.getItem('kebabName')
+
+  useEffect(() => {
+    if (locationFromMap) {
+      setValue('location', locationFromMap)
+    }
+  }, [locationFromMap])
 
   return (
     <CreateWrapper>
@@ -65,6 +79,7 @@ function CreateEvent() {
         <input type="datetime-local" {...register('startAt')} />
         <button type="submit">Gituwa</button>
       </form>
+      <Modal />
     </CreateWrapper>
   )
 }
