@@ -1,7 +1,8 @@
-import { useCallback, useEffect } from 'react'
+import { useEffect } from 'react'
 import styled from 'styled-components'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
+import Modal from '../../components/Modal/Modal'
 import { createEvent } from '../../slices/event'
 import { EventDataType } from '../../types/EventType'
 
@@ -61,11 +62,10 @@ function CreateEvent() {
   const locationFromMap = window.sessionStorage.getItem('kebabName')
 
   useEffect(() => {
-    console.log(locationFromMap)
     if (locationFromMap) {
       setValue('location', locationFromMap)
     }
-  }, [JSON.stringify(locationFromMap)])
+  }, [locationFromMap])
 
   return (
     <CreateWrapper>
@@ -79,6 +79,7 @@ function CreateEvent() {
         <input type="datetime-local" {...register('startAt')} />
         <button type="submit">Gituwa</button>
       </form>
+      <Modal />
     </CreateWrapper>
   )
 }

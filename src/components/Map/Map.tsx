@@ -25,7 +25,6 @@ function Map() {
 
   useEffect(() => {
     if (kebabPoints.length) {
-      console.log(mapLatitude)
       const map = tt.map({
         key: process.env.REACT_APP_TOMTOM_KEY as string,
         container: mapElement.current as HTMLDivElement,
