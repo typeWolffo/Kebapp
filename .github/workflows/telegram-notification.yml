@@ -1,5 +1,7 @@
 name: telegram message
-on: [push]
+on:
+  pull_request:
+    types: [opened, reopened]
 jobs:
 
   build:
@@ -12,9 +14,9 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            ${{ github.actor }} created commit:
-            Commit message: ${{ github.event.commits[0].message }}
+            ${{ github.actor }} created PR:
+            ${{ github.event.pull_request.title }}
             
             Repository: ${{ github.repository }}
             
-            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+            See changes: https://github.com/${{ github.repository }}/pull/${{github.events.pull_request.number}}
