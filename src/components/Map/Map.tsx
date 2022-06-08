@@ -66,7 +66,7 @@ function Map() {
     }
   }, [mapLatitude, mapLongitude])
 
-  return <div ref={mapElement} style={{ height: '500px', width: '100%' }} />
+  return <div ref={mapElement} className="w-full h-96" />
 }
 
 export default Map
