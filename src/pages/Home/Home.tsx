@@ -1,6 +1,5 @@
 import { useState, ReactNode, useEffect } from 'react'
 import styled from 'styled-components'
-import Map from '../../components/Map/Map'
 
 const StyledEventsWrapper = styled.div`
   display: flex;
@@ -91,24 +90,21 @@ function Home() {
 
   return (
     <StyledEventsWrapper>
-      <>
-        <Map />
-        {events &&
-          events.map(
-            ({ id, location, start_at: startAt, created_at: createdAt }): ReactNode => (
-              <StyledEvent key={createdAt}>
-                <StyledEventDetails>
-                  <span>{location}</span>
-                  <span>{`${weekdays[getKebsDate(startAt).day as unknown as keyof Weekdays]} (${getKebsDate(startAt).date})`}</span>
-                  <span>{`${getKebsDate(startAt).hour}:${getKebsDate(startAt).minute.padStart(2, '0')}`}</span>
-                </StyledEventDetails>
-                <StyledApprove>
-                  <span>ok</span>
-                </StyledApprove>
-              </StyledEvent>
-            )
-          )}
-      </>
+      {events &&
+        events.map(
+          ({ id, location, start_at: startAt, created_at: createdAt }): ReactNode => (
+            <StyledEvent key={createdAt}>
+              <StyledEventDetails>
+                <span>{location}</span>
+                <span>{`${weekdays[getKebsDate(startAt).day as unknown as keyof Weekdays]} (${getKebsDate(startAt).date})`}</span>
+                <span>{`${getKebsDate(startAt).hour}:${getKebsDate(startAt).minute.padStart(2, '0')}`}</span>
+              </StyledEventDetails>
+              <StyledApprove>
+                <span>ok</span>
+              </StyledApprove>
+            </StyledEvent>
+          )
+        )}
     </StyledEventsWrapper>
   )
 }
