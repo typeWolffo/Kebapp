@@ -22,17 +22,6 @@ const HomeIcon = tw(Home)`
 
 function Navbar() {
   return (
-    // <StyledNavbar>
-    //   <Link to="create-event">
-    //     <AddIcon />
-    //   </Link>
-    //   <Link to="/">
-    //     <HomeIcon />
-    //   </Link>
-    //   <Link to="settings">
-    //     <SettingsIcon />
-    //   </Link>
-    // </StyledNavbar>
     <ul className="menu menu-horizontal bg-base-100 rounded-box bottom-3 absolute left-1/2 transform -translate-x-1/2 shadow-2xl">
       <li>
         <Link to="create-event">
