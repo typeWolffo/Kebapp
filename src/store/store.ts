@@ -3,11 +3,13 @@ import authReducer from '../slices/auth'
 import messageReducer from '../slices/message'
 import eventReducer from '../slices/event'
 import modalReducer from '../slices/modal'
+import getAllEventsReducer from '../slices/getAllEvents'
 import { useDispatch } from 'react-redux'
 
 const reducer = {
   auth: authReducer,
   event: eventReducer,
+  getAllEvents: getAllEventsReducer,
   message: messageReducer,
   modal: modalReducer,
 }

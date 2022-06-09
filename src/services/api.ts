@@ -27,6 +27,10 @@ class Api {
   createEvent(event: EventDataType) {
     return this.instance.post('/events', event)
   }
+
+  getAllEvents() {
+    return this.instance.get('/events')
+  }
 }
 
 export default Api

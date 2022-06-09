@@ -1,5 +1,8 @@
 import { useState, ReactNode, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
+import { getAllEvents } from '../../slices/getAllEvents'
+import { RootState, useAppDispatch } from '../../store/store'
 
 const StyledEventsWrapper = styled.div`
   display: flex;
@@ -61,10 +64,11 @@ type Weekdays = {
 }
 
 function Home() {
-  // eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-  const [events, setEvents] = useState([])
+  const dispatch = useDispatch()
+  const { events, isLoading } = useSelector((state: RootState) => state.getAllEvents)
+
   useEffect(() => {
-    // get events
+    dispatch(getAllEvents([]))
   }, [])
 
   const weekdays: Weekdays = {
