@@ -78,9 +78,6 @@ function Login() {
 
   const { register, handleSubmit } = useForm<LoginUserDataType>()
 
-  // eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-  const [loading, setLoading] = useState(false)
-
   const { isLoggedIn } = useSelector((state: RootState) => state.auth)
 
   useEffect(() => {
@@ -89,10 +86,7 @@ function Login() {
 
   const onSubmit = (data: LoginUserDataType) => {
     const { email, password } = data
-    setLoading(true)
-    dispatch(loginUser({ email, password }))
-      .unwrap()
-      .catch(() => setLoading(false))
+    dispatch(loginUser({ email, password })).unwrap()
     if (isLoggedIn) navigate('/')
   }
 

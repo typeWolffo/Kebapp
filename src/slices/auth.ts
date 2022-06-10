@@ -25,6 +25,7 @@ export const loginUser = createAsyncThunk('auth/login', async ({ email, password
 })
 
 const initialState = userToken ? { isLoggedIn: true, userToken } : { isLoggedIn: false, userToken: null }
+
 const authSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(registerUser.fulfilled, (state, action) => {
@@ -36,13 +37,13 @@ const authSlice = createSlice({
     })
 
     builder.addCase(loginUser.fulfilled, (state, action) => {
-      state.isLoggedIn = true
       state.userToken = action.payload.user
+      state.isLoggedIn = true
     })
 
     builder.addCase(loginUser.rejected, (state, action) => {
-      state.isLoggedIn = false
       state.userToken = null
+      state.isLoggedIn = false
     })
   },
   initialState,

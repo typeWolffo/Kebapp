@@ -28,6 +28,10 @@ class Api {
     return this.instance.post('/events', event)
   }
 
+  getSingleEvent(id: number) {
+    return this.instance.get(`/events/${id}`)
+  }
+
   getAllEvents() {
     return this.instance.get('/events')
   }
