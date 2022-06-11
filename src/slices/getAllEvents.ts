@@ -8,8 +8,6 @@ const initialState = { events: [], isLoading: false }
 export const getAllEvents = createAsyncThunk('allEvents/get', async (events: [], thunkApi) => {
   const response = await api.getAllEvents()
   thunkApi.dispatch(setMessage(response.data.message))
-  console.log(thunkApi)
-
   return response.data
 })
 

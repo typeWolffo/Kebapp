@@ -29,7 +29,7 @@ class Api {
   }
 
   getSingleEvent(id: number) {
-    return this.instance.get(`/events/${id}`)
+    return this.instance.get(`/events/${id}`).then((response) => response.data.data.event)
   }
 
   getAllEvents() {

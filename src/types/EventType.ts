@@ -1,3 +1,4 @@
+import { UserType } from './UserType'
 export interface EventDataType {
   id?: number
   location: string
@@ -7,12 +8,14 @@ export interface EventDataType {
 
 export interface SingleEventDataType extends EventDataType {
   is_active?: boolean
-  author?: {
-    id: number
-    name: string
-    email: string
-  }
-  members?: []
+  author?: UserType
+  members: [
+    {
+      id: number
+      event_id: number
+      user: UserType
+    }
+  ]
   change_requests?: []
   updated_at: string
   created_at: string

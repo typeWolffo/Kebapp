@@ -6,12 +6,17 @@ import { Provider } from 'react-redux'
 import * as serviceWorkerRegistration from './serviceWorkerRegistration'
 
 import { store } from './store/store'
+import { QueryClient, QueryClientProvider } from 'react-query'
+
+const queryClient = new QueryClient()
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <QueryClientProvider client={queryClient}>
+        <App />
+      </QueryClientProvider>
     </Provider>
   </React.StrictMode>
 )

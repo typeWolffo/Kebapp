@@ -11,7 +11,7 @@ const reducer = {
   auth: authReducer,
   event: eventReducer,
   getAllEvents: getAllEventsReducer,
-  getSingleEvent: getSingleEventReducer,
+  // getSingleEvent: getSingleEventReducer,
   message: messageReducer,
   modal: modalReducer,
 }

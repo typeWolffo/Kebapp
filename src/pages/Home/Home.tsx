@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { getAllEvents } from '../../slices/getAllEvents'
 import { RootState } from '../../store/store'
 import EventCard from '../../components/EventCard/EventCard'
+import { EventDataType } from '../../types/EventType'
 
 const StyledEventsWrapper = styled.div`
   display: flex;
@@ -18,32 +19,12 @@ const StyledEventsWrapper = styled.div`
 function Home() {
   const dispatch = useDispatch()
   const { events } = useSelector((state: RootState) => state.getAllEvents)
-  const { isLoggedIn } = useSelector((state: RootState) => state.auth)
 
   useEffect(() => {
-    if (isLoggedIn) {
-      dispatch(getAllEvents([]))
-    }
+    dispatch(getAllEvents([]))
   }, [dispatch])
 
-  return (
-    <StyledEventsWrapper>
-      {events &&
-        events.map(({ id }) => (
-          <EventCard key={id} eventId={id} />
-          // <StyledEvent key={createdAt}>
-          //   <StyledEventDetails>
-          //     <span>{location}</span>
-          //     <span>{`${weekdays[getKebsDate(startAt).day as unknown as keyof Weekdays]} (${getKebsDate(startAt).date})`}</span>
-          //     <span>{`${getKebsDate(startAt).hour}:${getKebsDate(startAt).minute.padStart(2, '0')}`}</span>
-          //   </StyledEventDetails>
-          //   <StyledApprove>
-          //     <span>ok</span>
-          //   </StyledApprove>
-          // </StyledEvent>
-        ))}
-    </StyledEventsWrapper>
-  )
+  return <StyledEventsWrapper>{events && events.map((event: EventDataType) => <EventCard key={`${event.id}-${event.location}`} eventId={event.id as number} />)}</StyledEventsWrapper>
 }
 
 export default Home

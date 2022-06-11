@@ -12,7 +12,7 @@ const event: SingleEventDataType = {
   created_at: '',
   updated_at: '',
   author: undefined,
-  members: undefined,
+  members: [{ id: 0, event_id: 0, user: { id: 0, name: '', email: '' } }],
   is_active: undefined,
   change_requests: undefined,
 }
