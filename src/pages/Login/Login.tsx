@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { clearMessage } from '../../slices/message'
 import { loginUser } from '../../slices/auth'

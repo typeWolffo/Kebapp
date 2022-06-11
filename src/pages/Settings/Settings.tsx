@@ -57,8 +57,8 @@ function Settings() {
         <a href="https://t.me/typeWolffo">
           <TelegramIcon />
         </a>
-        <button type="button" onClick={handleLogout}>
-          IO
+        <button type="button" className="text-primary" onClick={handleLogout}>
+          Logout
         </button>
       </StyledIcons>
     </StyledWrapper>

@@ -8,6 +8,14 @@ import Navbar from './components/Navbar/Navbar'
 import Settings from './pages/Settings/Settings'
 import CreateEvent from './pages/CreateEvent/CreateEvent'
 import { RootState } from './store/store'
+import tw from 'tailwind-styled-components'
+
+const AppWrapper = tw.div`
+max-h-screen
+h-screen
+w-screen
+overflow-hidden
+`
 
 function App() {
   const { isLoggedIn } = useSelector((state: RootState) => state.auth)
@@ -16,14 +24,14 @@ function App() {
     <KebappContext>
       <BrowserRouter>
         {isLoggedIn ? (
-          <>
+          <AppWrapper>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/settings" element={<Settings />} />
               <Route path="/create-event" element={<CreateEvent />} />
             </Routes>
             <Navbar />
-          </>
+          </AppWrapper>
         ) : (
           <Routes>
             <Route path="/" element={<Login />} />

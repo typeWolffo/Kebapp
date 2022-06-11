@@ -1,24 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Cog } from '@styled-icons/boxicons-regular/Cog'
-import { MessageSquareAdd } from '@styled-icons/boxicons-regular/MessageSquareAdd'
-import { Home } from '@styled-icons/boxicons-regular/Home'
-import tw from 'tailwind-styled-components'
-
-const SettingsIcon = tw(Cog)`
-    text-secondary
-    w-8
-    h-8
-`
-const AddIcon = tw(MessageSquareAdd)`
-    text-secondary
-    w-8
-    h-8
-`
-const HomeIcon = tw(Home)`
-    text-secondary
-    w-8
-    h-8
-`
+import { AddIcon, HomeIcon, SettingsIcon } from './style'
 
 function Navbar() {
   return (

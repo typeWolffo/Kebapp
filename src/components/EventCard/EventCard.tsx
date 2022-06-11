@@ -1,28 +1,15 @@
 import isEmpty from 'lodash.isempty'
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import tw from 'tailwind-styled-components'
-import useEvent from '../../hooks/useEvent'
+import { memo, useCallback, useState } from 'react'
+import { useEvent, useJoinEvent } from '../../hooks/eventHooks'
 import { UserType } from '../../types/UserType'
+import { ChevronDown } from '@styled-icons/boxicons-regular/ChevronDown'
+import { StyledButton, StyledContent, StyledEvent, StyledHeader, StyledIcon, StyledParticipant, StyledParticipantsWrapper } from './style'
 
 type Props = {
   eventId: number
+  currentUserStatus: string
+  currentUser: UserType
 }
-
-const StyledEvent = tw.div`
-    w-9/12
-    p-5
-    border border-solid border-secondary 
-    rounded-md mb-5
-`
-const StyledHeader = tw.div`
-    text-xl
-`
-
-const StyledContent = tw.div`
-    ${({ $isActive }: { $isActive: boolean }) => ($isActive ? 'h-fit' : 'h-0')}
-    overflow-hidden
-`
 
 const getKebsDate = (event: string) => {
   const date = new Date(event)
@@ -35,23 +22,54 @@ const getKebsDate = (event: string) => {
   }
 }
 
+const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+
+const weekday = (date: Date) => days[new Date(date).getDay()]
+
+const createLetterAvatar = (name: string) => {
+  return name.charAt(0)
+}
+
 function EventCard(props: Props) {
-  const { eventId } = props
+  const { eventId, currentUser, currentUserStatus } = props
   const [isActive, setIsActive] = useState(false)
-  const { status, data, error, isFetching } = useEvent(eventId)
-  console.log({ data, error, status })
+  const { data: eventData, isFetching } = useEvent(eventId)
+  const { mutate: joinToEvent } = useJoinEvent()
+
+  const handelJoinClick = useCallback(() => joinToEvent(eventId), [])
 
   return (
-    <StyledEvent onClick={() => setIsActive(!isActive)}>
-      <StyledHeader>
-        {data.location} {eventId}
-      </StyledHeader>
-      <StyledContent $isActive={isActive}>
-        <div>{`${getKebsDate(data.start_at as string).hour}:${getKebsDate(data.start_at as string).minute.padStart(2, '0')}`}</div>
-        <div>{!isEmpty(data.members) && data.members.map((member: { user: UserType }) => <div key={member.user.id}>a</div>)}</div>
-      </StyledContent>
+    <StyledEvent>
+      {!isFetching && currentUserStatus === 'success' && (
+        <>
+          <StyledHeader onClick={() => setIsActive(!isActive)}>
+            {eventData.location}
+            <StyledIcon>
+              <ChevronDown className={isActive ? 'tranfororm  rotate-180' : ''} />
+            </StyledIcon>
+          </StyledHeader>
+
+          <StyledContent $isActive={isActive}>
+            <div className="py-5">
+              <span className="mr-2">{`${getKebsDate(eventData.start_at as string).hour}:${getKebsDate(eventData.start_at as string).minute.padStart(2, '0')}`}</span>
+              <span>{weekday(eventData.start_at)}</span>
+            </div>
+            <StyledParticipantsWrapper>
+              <StyledParticipant>{createLetterAvatar(eventData.author.name)}</StyledParticipant>
+
+              {!isEmpty(eventData.members) && eventData.members.map((member: { user: UserType }) => <StyledParticipant key={member.user.id}>{createLetterAvatar(member.user.name)}</StyledParticipant>)}
+            </StyledParticipantsWrapper>
+
+            {eventData.author.id !== currentUser.id && (
+              <StyledButton type="button" onClick={handelJoinClick}>
+                Join
+              </StyledButton>
+            )}
+          </StyledContent>
+        </>
+      )}
     </StyledEvent>
   )
 }
 
-export default EventCard
+export default memo(EventCard)

@@ -1,4 +1,4 @@
-import React, { createContext, ReactNode, useContext, useMemo, useState } from 'react'
+import { createContext, ReactNode, useContext, useMemo, useState } from 'react'
 import { ThemeProvider } from 'styled-components'
 
 export const AppContext = createContext({})
