@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { clearMessage } from '../../slices/message'
 import { loginUser } from '../../slices/auth'
@@ -78,9 +78,6 @@ function Login() {
 
   const { register, handleSubmit } = useForm<LoginUserDataType>()
 
-  // eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-  const [loading, setLoading] = useState(false)
-
   const { isLoggedIn } = useSelector((state: RootState) => state.auth)
 
   useEffect(() => {
@@ -89,10 +86,7 @@ function Login() {
 
   const onSubmit = (data: LoginUserDataType) => {
     const { email, password } = data
-    setLoading(true)
-    dispatch(loginUser({ email, password }))
-      .unwrap()
-      .catch(() => setLoading(false))
+    dispatch(loginUser({ email, password })).unwrap()
     if (isLoggedIn) navigate('/')
   }
 

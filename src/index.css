@@ -22,7 +22,7 @@ html {
 input[type='datetime-local']::-webkit-calendar-picker-indicator {
   opacity: 1;
   display: block;
-  background: url(./assets/calendar.png) no-repeat;
+  background: url(../public/calendar.png) no-repeat;
   width: 20px;
   height: 20px;
 

@@ -36,9 +36,9 @@ function Map() {
           anchor: 'bottom',
           offset: 45,
         }).setHTML(`
-        <div>
-            <p>${point.poi.name}</p>
-            <button type="button" onclick="window.sessionStorage.setItem('kebabName', '${point.poi.name}')">Select</button>
+        <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; color: #222222;">
+            <p style="font-size: 16px; margin: 15px 0;">${point.poi.name}</p>
+            <button style="padding: 10px 15px; border: 1px solid #000; border-radius: 5px;" type="button" onclick="window.sessionStorage.setItem('kebabName', '${point.poi.name}')">Select</button>
         </div>
         `)
 

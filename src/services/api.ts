@@ -21,11 +21,23 @@ class Api {
   }
 
   getCurrentUser() {
-    return this.instance.post('/auth/me')
+    return this.instance.post('/auth/me').then((response) => response.data)
   }
 
   createEvent(event: EventDataType) {
     return this.instance.post('/events', event)
+  }
+
+  getSingleEvent(id: number) {
+    return this.instance.get(`/events/${id}`).then((response) => response.data.data.event)
+  }
+
+  getAllEvents() {
+    return this.instance.get('/events')
+  }
+
+  joinToEvent(id: number) {
+    return this.instance.post(`/events/${id}/members`)
   }
 }
 

@@ -6,7 +6,7 @@ module.exports = {
   plugins: [require('@tailwindcss/forms'), require('daisyui')],
   daisyui: {
     styled: true,
-    themes: true,
+    themes: ['halloween'],
     base: true,
     utils: true,
     logs: true,
