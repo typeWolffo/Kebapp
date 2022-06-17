@@ -1,15 +1,26 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { Fragment } from 'react'
+import { FC, Fragment } from 'react'
+import { useSelector } from 'react-redux'
+import CreateEvent from '../../pages/CreateEvent/CreateEvent'
 import { closeModal } from '../../slices/modal'
-import { useAppDispatch } from '../../store/store'
-import Map from '../Map/Map'
+import { RootState, useAppDispatch } from '../../store/store'
+import { X } from '@styled-icons/boxicons-regular'
 
 function Modal({ isOpen }: { isOpen: boolean }) {
   const dispatch = useAppDispatch()
+  const modalData = useSelector((state: RootState) => state.modal.modalData)
+
+  const modalComponents = {
+    CreateEvent,
+  }
+
+  const ModalContent: FC | null = modalComponents[modalData as keyof typeof modalComponents]
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={() => dispatch(closeModal())}>
+        <div className="fixed inset-0 bg-black/10 backdrop-blur-sm" aria-hidden="true" />
+
         <Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0" enterTo="opacity-100" leave="ease-in duration-200" leaveFrom="opacity-100" leaveTo="opacity-0">
           <div className="fixed inset-0 bg-black bg-opacity-25" />
         </Transition.Child>
@@ -25,11 +36,11 @@ function Modal({ isOpen }: { isOpen: boolean }) {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-md flex justify-center flex-col transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                <Map />
-                <button type="button" className="btn" onClick={() => dispatch(closeModal())}>
-                  Close
+              <Dialog.Panel className="w-full relative max-w-md flex justify-center flex-col transform overflow-hidden rounded-2xl bg-base-100 p-2 pt-12 text-left align-middle shadow-xl transition-all">
+                <button type="button" className="text-primary w-8 h-8 absolute right-2 top-2" onClick={() => dispatch(closeModal())}>
+                  <X />
                 </button>
+                {modalData && <ModalContent />}
               </Dialog.Panel>
             </Transition.Child>
           </div>
