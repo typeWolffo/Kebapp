@@ -3,7 +3,7 @@ import tw from 'tailwind-styled-components'
 export const StyledEvent = tw.div`
     w-9/12
     p-5
-    border border-solid border-secondary 
+    border border-solid border-primary 
     rounded-md mb-5
 `
 export const StyledHeader = tw.div`
@@ -30,12 +30,11 @@ export const StyledParticipantsWrapper = tw.div`first-letter:
 `
 
 export const StyledParticipant = tw.div`first-letter:
-    bg-slate-700
-    border-2 border-solid border-secondary
-    w-7
-    h-7
+    border border-solid border-primary
+    w-8
+    h-8
     text-lg
-    rounded-xl
+    rounded-[100%]
     flex items-center justify-center
     -mx-1
 `

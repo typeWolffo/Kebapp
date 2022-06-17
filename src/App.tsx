@@ -6,9 +6,9 @@ import Home from './pages/Home/Home'
 import Register from './pages/Register/Register'
 import Navbar from './components/Navbar/Navbar'
 import Settings from './pages/Settings/Settings'
-import CreateEvent from './pages/CreateEvent/CreateEvent'
 import { RootState } from './store/store'
 import tw from 'tailwind-styled-components'
+import Modal from './components/Modal/Modal'
 
 const AppWrapper = tw.div`
 max-h-screen
@@ -19,6 +19,7 @@ overflow-hidden
 
 function App() {
   const { isLoggedIn } = useSelector((state: RootState) => state.auth)
+  const { isModalOpen } = useSelector((state: RootState) => state.modal)
 
   return (
     <KebappContext>
@@ -28,9 +29,9 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/settings" element={<Settings />} />
-              <Route path="/create-event" element={<CreateEvent />} />
             </Routes>
             <Navbar />
+            <Modal isOpen={isModalOpen} />
           </AppWrapper>
         ) : (
           <Routes>

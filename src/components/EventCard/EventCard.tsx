@@ -1,17 +1,18 @@
 import isEmpty from 'lodash.isempty'
 import { memo, useCallback, useState } from 'react'
-import { useEvent, useJoinEvent } from '../../hooks/eventHooks'
+import { useJoinEvent } from '../../hooks/eventHooks'
 import { UserType } from '../../types/UserType'
 import { ChevronDown } from '@styled-icons/boxicons-regular/ChevronDown'
 import { StyledButton, StyledContent, StyledEvent, StyledHeader, StyledIcon, StyledParticipant, StyledParticipantsWrapper } from './style'
+import { EventDataType } from '../../types/EventType'
 
 type Props = {
-  eventId: number
+  event: EventDataType
   currentUserStatus: string
   currentUser: UserType
 }
 
-const getKebsDate = (event: string) => {
+const getKebsDate = (event: Date) => {
   const date = new Date(event)
 
   return {
@@ -27,23 +28,22 @@ const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 
 const weekday = (date: Date) => days[new Date(date).getDay()]
 
 const createLetterAvatar = (name: string) => {
-  return name.charAt(0)
+  return <span className="transform -translate-y-[3%]">{name.charAt(0)}</span> // magic number for optical alignment
 }
 
 function EventCard(props: Props) {
-  const { eventId, currentUser, currentUserStatus } = props
+  const { event, currentUser, currentUserStatus } = props
   const [isActive, setIsActive] = useState(false)
-  const { data: eventData, isFetching } = useEvent(eventId)
   const { mutate: joinToEvent } = useJoinEvent()
 
-  const handelJoinClick = useCallback(() => joinToEvent(eventId), [])
+  const handelJoinClick = useCallback(() => joinToEvent(event.id as number), [event.id])
 
   return (
     <StyledEvent>
-      {!isFetching && currentUserStatus === 'success' && (
+      {event && currentUserStatus === 'success' && (
         <>
           <StyledHeader onClick={() => setIsActive(!isActive)}>
-            {eventData.location}
+            {event.location}
             <StyledIcon>
               <ChevronDown className={isActive ? 'tranfororm  rotate-180' : ''} />
             </StyledIcon>
@@ -51,16 +51,16 @@ function EventCard(props: Props) {
 
           <StyledContent $isActive={isActive}>
             <div className="py-5">
-              <span className="mr-2">{`${getKebsDate(eventData.start_at as string).hour}:${getKebsDate(eventData.start_at as string).minute.padStart(2, '0')}`}</span>
-              <span>{weekday(eventData.start_at)}</span>
+              <span className="mr-2">{`${getKebsDate(event.start_at as Date).hour}:${getKebsDate(event.start_at as Date).minute.padStart(2, '0')}`}</span>
+              <span>{weekday(event.start_at as Date)}</span>
             </div>
             <StyledParticipantsWrapper>
-              <StyledParticipant>{createLetterAvatar(eventData.author.name)}</StyledParticipant>
+              <StyledParticipant>{createLetterAvatar(event.author?.name as string)}</StyledParticipant>
 
-              {!isEmpty(eventData.members) && eventData.members.map((member: { user: UserType }) => <StyledParticipant key={member.user.id}>{createLetterAvatar(member.user.name)}</StyledParticipant>)}
+              {!isEmpty(event.members) && event.members?.map((member: { user: UserType }) => <StyledParticipant key={member.user.id}>{createLetterAvatar(member.user.name)}</StyledParticipant>)}
             </StyledParticipantsWrapper>
 
-            {eventData.author.id !== currentUser.id && (
+            {event.author?.id !== currentUser.id && (
               <StyledButton type="button" onClick={handelJoinClick}>
                 Join
               </StyledButton>

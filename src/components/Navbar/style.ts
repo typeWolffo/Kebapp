@@ -5,40 +5,40 @@ import { Menu } from '@styled-icons/boxicons-regular/Menu'
 import tw from 'tailwind-styled-components'
 
 export const SettingsIcon = tw(Cog)`
-    text-secondary
-    p-1.5
+    text-primary
+    p-2
     mb-3
     h-12
     w-12
-    rounded-box
-    border border-solid border-secondary
+    rounded-full
+    border border-solid border-primary
 `
 export const AddIcon = tw(MessageSquareAdd)`
-    text-secondary
-    p-1.5
+    text-primary
+    p-2
     mb-3
     h-12
     w-12
-    rounded-box
-    border border-solid border-secondary
+    rounded-full
+    border border-solid border-primary
 `
 export const HomeIcon = tw(Home)`
-    text-secondary
-    p-1.5
+    text-primary
+    p-2
     mb-3
     h-12
     w-12
-    rounded-box
-    border border-solid border-secondary
+    rounded-full
+    border border-solid border-primary
 `
 export const MenuIcon = tw(Menu)`
-    text-secondary
-    p-1.5
+    text-primary
+    p-2
     h-12
     w-12
     z-20
-    rounded-box
-    border border-solid border-secondary
+    rounded-full
+    border border-solid border-primary
     shadow-gray-900
     shadow-lg
 `

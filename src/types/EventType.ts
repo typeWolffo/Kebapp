@@ -2,14 +2,10 @@ import { UserType } from './UserType'
 export interface EventDataType {
   id?: number
   location: string
-  startAt?: string
-  start_at?: string
-}
-
-export interface SingleEventDataType extends EventDataType {
+  start_at: Date
   is_active?: boolean
   author?: UserType
-  members: [
+  members?: [
     {
       id: number
       event_id: number
@@ -17,6 +13,6 @@ export interface SingleEventDataType extends EventDataType {
     }
   ]
   change_requests?: []
-  updated_at: string
-  created_at: string
+  updated_at?: string
+  created_at?: string
 }

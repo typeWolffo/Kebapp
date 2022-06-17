@@ -20,7 +20,7 @@ function Home() {
 
   return (
     <StyledEventsWrapper>
-      {events && events.map((event: EventDataType) => <EventCard key={`${event.id}-${event.location}`} eventId={event.id as number} currentUser={userData} currentUserStatus={userStatus} />)}
+      {events && events.map((event: EventDataType) => <EventCard key={`${event.id}-${event.location}`} event={event} currentUser={userData} currentUserStatus={userStatus} />)}
     </StyledEventsWrapper>
   )
 }

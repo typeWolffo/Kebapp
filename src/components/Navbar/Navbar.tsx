@@ -1,25 +1,33 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { openModalWith } from '../../slices/modal'
 import { AddIcon, HomeIcon, MenuIcon, SettingsIcon, StyledList } from './style'
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
+  const dispatch = useDispatch()
+
+  const handleAddEventClick = () => {
+    setIsOpen(false)
+    dispatch(openModalWith('CreateEvent'))
+  }
 
   return (
     <div className="absolute bottom-3 right-3 h-auto">
       <StyledList $isOpen={isOpen}>
         <li>
-          <Link to="create-event">
+          <div onClick={handleAddEventClick}>
             <AddIcon />
-          </Link>
+          </div>
         </li>
         <li>
-          <Link to="/">
+          <Link to="/" onClick={() => setIsOpen(false)}>
             <HomeIcon />
           </Link>
         </li>
         <li>
-          <Link to="settings">
+          <Link to="settings" onClick={() => setIsOpen(false)}>
             <SettingsIcon />
           </Link>
         </li>

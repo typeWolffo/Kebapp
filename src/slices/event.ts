@@ -9,7 +9,7 @@ const event = { location: null, start_at: null }
 
 const initialState = { event, isEventCreated: false }
 
-export const createEvent = createAsyncThunk('event/add', async ({ location, start_at }: { location: string; start_at: string }, thunkApi) => {
+export const createEvent = createAsyncThunk('event/add', async ({ location, start_at }: { location: string; start_at: Date }, thunkApi) => {
   const response = await api.createEvent({ location, start_at })
   thunkApi.dispatch(setMessage(response.data.message))
   return response.data

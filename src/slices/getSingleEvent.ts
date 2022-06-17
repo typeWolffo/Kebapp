@@ -1,14 +1,14 @@
-import { SingleEventDataType } from './../types/EventType'
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import Api from '../services/api'
+import { EventDataType } from '../types/EventType'
 import { setMessage } from './message'
 
 const api = new Api()
 
-const event: SingleEventDataType = {
-  id: undefined,
+const event: EventDataType = {
+  id: 0,
   location: '',
-  start_at: undefined,
+  start_at: new Date(),
   created_at: '',
   updated_at: '',
   author: undefined,
