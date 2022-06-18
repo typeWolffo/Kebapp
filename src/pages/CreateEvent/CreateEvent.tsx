@@ -1,31 +1,47 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
-import { useDispatch } from 'react-redux'
-import { createEvent } from '../../slices/event'
-import { EventDataType } from '../../types/EventType'
+import { useDispatch, useSelector } from 'react-redux'
+import { createEvent, updateEvent } from '../../slices/event'
+import { EventDataType, ManageEventType } from '../../types/EventType'
 import Map from '../../components/Map/Map'
 import { closeModal } from '../../slices/modal'
+import { RootState } from '../../store/store'
+import { useNavigate, useParams } from 'react-router-dom'
 
 function CreateEvent() {
-  const { register, handleSubmit, setValue } = useForm<EventDataType>()
+  const { formModeData } = useSelector((state: RootState) => state.form)
+  const { events } = useSelector((state: RootState) => state.getAllEvents)
+  const { id } = useParams()
+  const [currentEvent, setCurrentEvent] = useState<EventDataType>({ location: '', start_at: new Date() })
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (id) {
+      const event = events.filter((singleEventvent: ManageEventType) => singleEventvent.id === Number(id))
+      setCurrentEvent(event[0])
+    }
+  }, [id])
+
+  const { register, handleSubmit, setValue } = useForm<ManageEventType>()
 
   const onSubmit: SubmitHandler<EventDataType> = (data) => {
     const eventData = {
       location: data.location,
       start_at: data.start_at,
     }
-    dispatch(createEvent(eventData))
+    if (String(formModeData) === 'create') dispatch(createEvent(eventData))
+    if (id && String(formModeData) === 'edit') dispatch(updateEvent({ id, ...eventData }))
     dispatch(closeModal())
+    navigate('/')
   }
 
   const locationFromMap = window.sessionStorage.getItem('kebabName')
 
   useEffect(() => {
-    if (locationFromMap) {
-      setValue('location', locationFromMap)
-    }
-  }, [locationFromMap])
+    if (locationFromMap) setValue('location', locationFromMap)
+    if (currentEvent.location) setValue('location', currentEvent.location)
+  }, [locationFromMap, currentEvent.location])
 
   return (
     <>
@@ -39,7 +55,7 @@ function CreateEvent() {
           />
           <input {...register('start_at')} type="datetime-local" placeholder="Date" className="input input-bordered input-primary w-full max-w-xs h-14 text-lg text-primary" />
           <button type="submit" className="btn m-5">
-            Create
+            {String(formModeData) === 'create' ? 'Create' : 'Save'}
           </button>
         </form>
         <div className="divider px-12">OR</div>

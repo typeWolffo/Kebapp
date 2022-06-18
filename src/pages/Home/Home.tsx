@@ -10,13 +10,14 @@ import { StyledEventsWrapper } from './style'
 function Home() {
   const dispatch = useDispatch()
   const { events } = useSelector((state: RootState) => state.getAllEvents)
+  const { userToken } = useSelector((state: RootState) => state.auth)
   const { status: userStatus, mutate: getUser, data: userData } = useUser()
 
   useEffect(() => getUser(), [])
 
   useEffect(() => {
-    dispatch(getAllEvents([]))
-  }, [dispatch])
+    if (userToken) dispatch(getAllEvents([]))
+  }, [userToken])
 
   return (
     <StyledEventsWrapper>

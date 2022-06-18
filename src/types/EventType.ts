@@ -16,3 +16,9 @@ export interface EventDataType {
   updated_at?: string
   created_at?: string
 }
+
+export interface ManageEventType {
+  id?: number
+  location: string
+  start_at: Date
+}
