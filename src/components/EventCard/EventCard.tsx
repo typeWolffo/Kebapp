@@ -5,6 +5,9 @@ import { UserType } from '../../types/UserType'
 import { ChevronDown } from '@styled-icons/boxicons-regular/ChevronDown'
 import { StyledButton, StyledContent, StyledEvent, StyledHeader, StyledIcon, StyledParticipant, StyledParticipantsWrapper } from './style'
 import { EventDataType } from '../../types/EventType'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { FormModes, setFormMode } from '../../slices/form'
 
 type Props = {
   event: EventDataType
@@ -35,8 +38,14 @@ function EventCard(props: Props) {
   const { event, currentUser, currentUserStatus } = props
   const [isActive, setIsActive] = useState(false)
   const { mutate: joinToEvent } = useJoinEvent()
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const handelJoinClick = useCallback(() => joinToEvent(event.id as number), [event.id])
+  const handleEditClick = () => {
+    dispatch(setFormMode(FormModes.EDIT))
+    navigate(`/${event.id}/edit`)
+  }
 
   return (
     <StyledEvent>
@@ -63,6 +72,11 @@ function EventCard(props: Props) {
             {event.author?.id !== currentUser.id && (
               <StyledButton type="button" onClick={handelJoinClick}>
                 Join
+              </StyledButton>
+            )}
+            {event.author?.id === currentUser.id && (
+              <StyledButton type="button" onClick={handleEditClick}>
+                Edit
               </StyledButton>
             )}
           </StyledContent>

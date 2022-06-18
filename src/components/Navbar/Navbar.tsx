@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { FormModes, setFormMode } from '../../slices/form'
 import { openModalWith } from '../../slices/modal'
 import { AddIcon, HomeIcon, MenuIcon, SettingsIcon, StyledList } from './style'
 
@@ -10,7 +11,8 @@ function Navbar() {
 
   const handleAddEventClick = () => {
     setIsOpen(false)
-    dispatch(openModalWith('CreateEvent'))
+    dispatch(openModalWith({ modalType: 'EventForm' }))
+    dispatch(setFormMode(FormModes.CREATE))
   }
 
   return (

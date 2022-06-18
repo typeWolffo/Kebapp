@@ -8,13 +8,13 @@ import { X } from '@styled-icons/boxicons-regular'
 
 function Modal({ isOpen }: { isOpen: boolean }) {
   const dispatch = useAppDispatch()
-  const modalData = useSelector((state: RootState) => state.modal.modalData)
+  const { modalType } = useSelector((state: RootState) => state.modal.modalData)
 
   const modalComponents = {
-    CreateEvent,
+    EventForm: CreateEvent,
   }
 
-  const ModalContent: FC | null = modalComponents[modalData as keyof typeof modalComponents]
+  const ModalContent: FC | null = modalComponents[modalType as keyof typeof modalComponents]
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -40,7 +40,7 @@ function Modal({ isOpen }: { isOpen: boolean }) {
                 <button type="button" className="text-primary w-8 h-8 absolute right-2 top-2" onClick={() => dispatch(closeModal())}>
                   <X />
                 </button>
-                {modalData && <ModalContent />}
+                {modalType && <ModalContent />}
               </Dialog.Panel>
             </Transition.Child>
           </div>

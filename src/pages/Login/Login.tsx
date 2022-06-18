@@ -15,61 +15,14 @@ const StyledFormWrapper = styled.div`
   height: 100vh;
   justify-content: center;
   align-items: center;
-
-  span {
-    color: ${({ theme }) => theme.accentColor};
-    margin: 10px 0;
-    font-family: Ubuntu, sans-serif;
-    display: flex;
-    align-items: center;
-
-    :before,
-    :after {
-      content: '';
-      width: 50px;
-      height: 1px;
-      margin: 0 5px;
-      background-color: ${({ theme }) => theme.accentColor};
-    }
-  }
 `
 
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
+  align-items: center;
   max-width: 400px;
   width: 80%;
-
-  input {
-    height: 45px;
-    margin: 10px 0;
-    border-radius: 5px;
-    border-color: ${({ theme }) => theme.accentColor};
-    background-color: transparent;
-    color: ${({ theme }) => theme.fontColor};
-    outline: none;
-    border-style: solid;
-  }
-
-  button {
-    background-color: ${({ theme }) => theme.primaryColor};
-    border: 1px solid ${({ theme }) => theme.accentColor};
-    border-radius: 5px;
-    color: ${({ theme }) => theme.fontColor};
-    width: 200px;
-    height: 45px;
-    align-self: center;
-  }
-`
-
-const StyledRegisterButton = styled.button`
-  background-color: ${({ theme }) => theme.primaryColor};
-  border: 1px solid ${({ theme }) => theme.accentColor};
-  border-radius: 5px;
-  color: ${({ theme }) => theme.fontColor};
-  width: 180px;
-  height: 40px;
-  align-self: center;
 `
 
 function Login() {
@@ -93,14 +46,16 @@ function Login() {
   return (
     <StyledFormWrapper>
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
-        <input type="text" {...register('email', { required: 'Field login is required' })} />
-        <input type="password" {...register('password', { required: 'Field password is required' })} />
-        <button type="submit">Login</button>
+        <input type="text" placeholder="Email" {...register('email', { required: 'Field login is required' })} className="input input-bordered input-primary w-full max-w-xs mb-5" />
+        <input type="password" placeholder="Password" {...register('password', { required: 'Field password is required' })} className="input input-bordered input-primary w-full max-w-xs mb-5" />
+        <button type="submit" className="btn btn-primary w-10/12">
+          Login
+        </button>
       </StyledForm>
-      <span>OR</span>
-      <StyledRegisterButton type="button" onClick={() => navigate('/register')}>
+      <div className="divider px-10">OR</div>
+      <button type="button" className="btn btn-ghost" onClick={() => navigate('/register')}>
         Register
-      </StyledRegisterButton>
+      </button>
     </StyledFormWrapper>
   )
 }

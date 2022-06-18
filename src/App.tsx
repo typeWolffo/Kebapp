@@ -9,6 +9,7 @@ import Settings from './pages/Settings/Settings'
 import { RootState } from './store/store'
 import tw from 'tailwind-styled-components'
 import Modal from './components/Modal/Modal'
+import CreateEvent from './pages/CreateEvent/CreateEvent'
 
 const AppWrapper = tw.div`
 max-h-screen
@@ -29,6 +30,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/settings" element={<Settings />} />
+              <Route path="/:id/edit" element={<CreateEvent />} />
             </Routes>
             <Navbar />
             <Modal isOpen={isModalOpen} />
