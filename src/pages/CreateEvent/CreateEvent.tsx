@@ -7,14 +7,16 @@ import Map from '../../components/Map/Map'
 import { closeModal } from '../../slices/modal'
 import { RootState } from '../../store/store'
 import { useNavigate, useParams } from 'react-router-dom'
+import { useAppState } from '../../contexts/KebappContext'
 
 function CreateEvent() {
   const { formModeData } = useSelector((state: RootState) => state.form)
   const { events } = useSelector((state: RootState) => state.getAllEvents)
-  const { id } = useParams()
   const [currentEvent, setCurrentEvent] = useState<EventDataType>({ location: '', start_at: new Date() })
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const { id } = useParams()
+  const { isOnline } = useAppState()
 
   useEffect(() => {
     if (id) {
@@ -30,8 +32,22 @@ function CreateEvent() {
       location: data.location,
       start_at: data.start_at,
     }
-    if (String(formModeData) === 'create') dispatch(createEvent(eventData))
-    if (id && String(formModeData) === 'edit') dispatch(updateEvent({ id, ...eventData }))
+    if (isOnline) {
+      if (String(formModeData) === 'create') dispatch(createEvent(eventData))
+      if (id && String(formModeData) === 'edit') dispatch(updateEvent({ id, ...eventData }))
+    } else {
+      if (String(formModeData) === 'create') {
+        const storageEvents = localStorage.getItem('savedEvents')
+        if (storageEvents) {
+          const lastEvents = JSON.parse(storageEvents)
+          const actualEvents = [...lastEvents, eventData]
+          localStorage.setItem('savedEvents', JSON.stringify(actualEvents))
+        } else {
+          localStorage.setItem('savedEvents', JSON.stringify([eventData]))
+        }
+      }
+      if (id && String(formModeData) === 'edit') dispatch(updateEvent({ id, ...eventData }))
+    }
     dispatch(closeModal())
     navigate('/')
   }
@@ -46,22 +62,26 @@ function CreateEvent() {
   return (
     <>
       <div className="flex flex-col items-center justify-center w-full h-full">
-        <form onSubmit={handleSubmit(onSubmit)} className="w-9/12 flex justify-center flex-col">
+        <form onSubmit={handleSubmit(onSubmit)} className="w-9/12 flex justify-center items-center flex-col">
           <input
             {...register('location')}
             type="text"
             placeholder="Location"
-            className="input input-bordered input-primary w-full max-w-xs outline-none focus:outline-none active:outline-none mb-4 h-14 text-lg text-primary"
+            className="input input-bordered input-primary w-72 max-w-xs outline-none focus:outline-none active:outline-none mb-4 h-14 text-lg text-primary"
           />
-          <input {...register('start_at')} type="datetime-local" placeholder="Date" className="input input-bordered input-primary w-full max-w-xs h-14 text-lg text-primary" />
-          <button type="submit" className="btn m-5">
+          <input {...register('start_at')} type="datetime-local" placeholder="Date" className="input input-bordered input-primary w-72 max-w-xs h-14 text-lg text-primary" />
+          <button type="submit" className="btn m-5 w-10/12">
             {String(formModeData) === 'create' ? 'Create' : 'Save'}
           </button>
         </form>
-        <div className="divider px-12">OR</div>
-        <div>
-          <Map />
-        </div>
+        {isOnline && (
+          <>
+            <div className="divider px-12">OR</div>
+            <div>
+              <Map />
+            </div>
+          </>
+        )}
       </div>
     </>
   )
