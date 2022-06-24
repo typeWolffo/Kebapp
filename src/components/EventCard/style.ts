@@ -3,7 +3,7 @@ import tw from 'tailwind-styled-components'
 export const StyledEvent = tw.div`
     w-9/12
     p-5
-    border border-solid border-primary 
+    border border-solid ${({ $isDraft }: { $isDraft: boolean }) => ($isDraft ? 'border-secondary' : 'border-primary')}
     rounded-md mb-5
 `
 export const StyledHeader = tw.div`
