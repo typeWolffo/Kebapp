@@ -6,7 +6,7 @@ class Api {
 
   constructor() {
     this.instance = axios.create({
-      baseURL: 'https://kebapp.com.pl/api',
+      baseURL: 'https://api.kebapp.com.pl',
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Content-Type': 'application/json;charset=UTF-8',
