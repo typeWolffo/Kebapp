@@ -23,8 +23,8 @@ function App() {
   const { isModalOpen } = useSelector((state: RootState) => state.modal)
 
   return (
-    <KebappContext>
-      <BrowserRouter>
+    <BrowserRouter>
+      <KebappContext>
         {isLoggedIn ? (
           <AppWrapper>
             <Routes>
@@ -41,8 +41,8 @@ function App() {
             <Route path="register" element={<Register />} />
           </Routes>
         )}
-      </BrowserRouter>
-    </KebappContext>
+      </KebappContext>
+    </BrowserRouter>
   )
 }
 

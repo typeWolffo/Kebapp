@@ -5,13 +5,11 @@ export interface EventDataType {
   start_at: Date
   is_active?: boolean
   author?: UserType
-  members?: [
-    {
-      id: number
-      event_id: number
-      user: UserType
-    }
-  ]
+  members?: {
+    id: number
+    event_id: number
+    user: UserType
+  }[]
   change_requests?: []
   updated_at?: string
   created_at?: string

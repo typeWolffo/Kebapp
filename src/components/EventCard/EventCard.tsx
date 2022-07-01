@@ -19,7 +19,7 @@ const getKebsDate = (event: Date) => {
   const date = new Date(event)
 
   return {
-    date: `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`,
+    date: `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`,
     day: String(date.getDay()),
     hour: String(date.getHours()),
     minute: String(date.getMinutes()),
@@ -61,6 +61,7 @@ function EventCard(props: Props) {
           <StyledContent $isActive={isActive}>
             <div className="py-5">
               <span className="mr-2">{`${getKebsDate(event.start_at as Date).hour}:${getKebsDate(event.start_at as Date).minute.padStart(2, '0')}`}</span>
+              <span className="mr-2">{`${getKebsDate(event.start_at as Date).date}`}</span>
               <span>{weekday(event.start_at as Date)}</span>
             </div>
             <StyledParticipantsWrapper>

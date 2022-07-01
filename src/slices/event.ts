@@ -1,4 +1,3 @@
-import { getAllEvents } from './getAllEvents'
 /* eslint-disable camelcase */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { setMessage } from './message'
@@ -13,14 +12,12 @@ const initialState = { event, isEventManaged: false }
 export const createEvent = createAsyncThunk('event/add', async ({ location, start_at }: { location: string; start_at: Date }, thunkApi) => {
   const response = await api.createEvent({ location, start_at })
   thunkApi.dispatch(setMessage(response.data))
-  thunkApi.dispatch(getAllEvents([]))
   return response.data
 })
 
 export const updateEvent = createAsyncThunk('event/update', async ({ id, location, start_at }: { id: string; location: string; start_at: Date }, thunkApi) => {
   const response = await api.updateEvent(Number(id), { location, start_at })
   thunkApi.dispatch(setMessage(response.data))
-  thunkApi.dispatch(getAllEvents([]))
   return response.data
 })
 

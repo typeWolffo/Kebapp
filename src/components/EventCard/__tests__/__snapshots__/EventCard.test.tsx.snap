@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EventCard should render 1`] = `
+<div>
+  <div
+    class="w-9/12 p-5 border border-solid border-primary rounded-md mb-5"
+  >
+    <div
+      class="w-full text-xl flex justify-between"
+    >
+      Alanya Kebab
+      <div
+        class="w-8 h-8"
+      >
+        <svg
+          aria-hidden="true"
+          class="StyledIconBase-ea9ulj-0 lbJwfL"
+          fill="currentColor"
+          focusable="false"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M16.293 9.293 12 13.586 7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"
+          />
+        </svg>
+      </div>
+    </div>
+    <div
+      class="h-0 overflow-hidden"
+    >
+      <div
+        class="py-5"
+      >
+        <span
+          class="mr-2"
+        >
+          17:18
+        </span>
+        <span
+          class="mr-2"
+        >
+          25.6.2022
+        </span>
+        <span>
+          Saturday
+        </span>
+      </div>
+      <div
+        class="first-letter: mt-4 px-1 flex"
+      >
+        <div
+          class="first-letter: border border-solid border-primary w-8 h-8 text-lg rounded-[100%] flex items-center justify-center -mx-1"
+        >
+          <span
+            class="transform -translate-y-[3%]"
+          >
+            w
+          </span>
+        </div>
+        <div
+          class="first-letter: border border-solid border-primary w-8 h-8 text-lg rounded-[100%] flex items-center justify-center -mx-1"
+        >
+          <span
+            class="transform -translate-y-[3%]"
+          >
+            t
+          </span>
+        </div>
+        <div
+          class="first-letter: border border-solid border-primary w-8 h-8 text-lg rounded-[100%] flex items-center justify-center -mx-1"
+        >
+          <span
+            class="transform -translate-y-[3%]"
+          >
+            x
+          </span>
+        </div>
+      </div>
+      <button
+        class="btn btn-outline btn-accent mt-4 w-full"
+        type="button"
+      >
+        Edit
+      </button>
+    </div>
+  </div>
+</div>
+`;
