@@ -1,4 +1,4 @@
-import { prettyDOM, render, screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { createMemoryHistory } from 'history'
 import { Provider } from 'react-redux'

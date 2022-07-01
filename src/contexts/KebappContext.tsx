@@ -26,7 +26,7 @@ export default function KebappContext(props: Props) {
   const { children } = props
   const [isAuth, setIsAuth] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const { status: allEventStatus, data: events, error: allEventsError } = useAllEvents()
+  const { status: allEventStatus, data: events } = useAllEvents()
   const dispatch = useDispatch()
   useTitle('Kebapp')
 
