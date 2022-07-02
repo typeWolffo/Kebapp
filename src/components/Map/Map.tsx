@@ -4,6 +4,7 @@ import '@tomtom-international/web-sdk-maps/dist/maps.css'
 import tt from '@tomtom-international/web-sdk-maps'
 import axios from 'axios'
 import { useEffect, useRef, useState } from 'react'
+import PropagateLoader from 'react-spinners/PropagateLoader'
 
 function Map() {
   const [mapLongitude, setMapLongitude] = useState<number>(0)
@@ -11,6 +12,7 @@ function Map() {
   const [kebabPoints, setKebabPoints] = useState([])
 
   const mapElement = useRef<HTMLDivElement>(null)
+  console.log(mapElement)
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -67,6 +69,14 @@ function Map() {
         })
     }
   }, [mapLatitude, mapLongitude])
+
+  if (!mapLatitude && !mapLongitude) {
+    return (
+      <div className="flex justify-center items-center w-screen h-96">
+        <PropagateLoader />
+      </div>
+    )
+  }
 
   return <div ref={mapElement} className="w-screen h-96" />
 }

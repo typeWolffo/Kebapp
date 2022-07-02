@@ -1,11 +1,13 @@
 import { useEffect } from 'react'
-import SavedEventCard from '../../components/EventCard/SavedEventCard'
-import { useAllEvents } from '../../hooks/eventHooks'
+import PropagateLoader from 'react-spinners/PropagateLoader'
+
 import EventCard from '../../components/EventCard/EventCard'
-import { EventDataType, ManageEventType } from '../../types/EventType'
-import useUser from '../../hooks/useUser'
-import { StyledEventsWrapper } from './style'
+import SavedEventCard from '../../components/EventCard/SavedEventCard'
 import { useAppState } from '../../contexts/KebappContext'
+import { useAllEvents } from '../../hooks/eventHooks'
+import useUser from '../../hooks/useUser'
+import { EventDataType, ManageEventType } from '../../types/EventType'
+import { StyledEventsWrapper } from './style'
 
 function Home() {
   const { status: userStatus, mutate: getUser, data: userData } = useUser()
@@ -13,13 +15,19 @@ function Home() {
   const storageEvents = localStorage.getItem('savedEvents')
   const { data: events } = useAllEvents()
 
-  console.log(events)
-
   const draftEvents = storageEvents && JSON.parse(storageEvents)
 
   useEffect(() => {
     if (isOnline) getUser()
   }, [])
+
+  if (!events) {
+    return (
+      <div className="w-screen h-screen flex items-center justify-center">
+        <PropagateLoader />
+      </div>
+    )
+  }
 
   return (
     <StyledEventsWrapper>

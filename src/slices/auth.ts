@@ -1,9 +1,10 @@
 /* eslint-disable camelcase */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { setMessage } from './message'
+
 import AuthService from '../services/authService'
-import { RegisterUserDataType } from '../types/RegisterUserDataType'
 import { LoginUserDataType } from '../types/LoginUserDataType'
+import { RegisterUserDataType } from '../types/RegisterUserDataType'
+import { setMessage } from './message'
 
 const userToken = localStorage.getItem('token')
 const auth = new AuthService()

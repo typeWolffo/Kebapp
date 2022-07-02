@@ -1,7 +1,8 @@
 /* eslint-disable camelcase */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { setMessage } from './message'
+
 import Api from '../services/api'
+import { setMessage } from './message'
 
 const api = new Api()
 

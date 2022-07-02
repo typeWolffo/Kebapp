@@ -1,12 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
-import App from './App'
-import { Provider } from 'react-redux'
-import * as serviceWorkerRegistration from './serviceWorkerRegistration'
-
-import { store } from './store/store'
 import { QueryClient, QueryClientProvider } from 'react-query'
+import { Provider } from 'react-redux'
+
+import App from './App'
+import * as serviceWorkerRegistration from './serviceWorkerRegistration'
+import { store } from './store/store'
 
 const queryClient = new QueryClient()
 

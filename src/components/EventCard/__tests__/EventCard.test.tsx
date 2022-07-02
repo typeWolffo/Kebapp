@@ -1,8 +1,9 @@
 import { render, screen } from '@testing-library/react'
-import { QueryClient, QueryClientProvider } from 'react-query'
 import { createMemoryHistory } from 'history'
+import { QueryClient, QueryClientProvider } from 'react-query'
 import { Provider } from 'react-redux'
 import { Router } from 'react-router-dom'
+
 import { store } from '../../../store/store'
 import EventCard from '../EventCard'
 

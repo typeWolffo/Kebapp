@@ -1,13 +1,16 @@
+import { ChevronDown } from '@styled-icons/boxicons-regular/ChevronDown'
 import isEmpty from 'lodash.isempty'
 import { memo, useCallback, useState } from 'react'
-import { useJoinEvent } from '../../hooks/eventHooks'
-import { UserType } from '../../types/UserType'
-import { ChevronDown } from '@styled-icons/boxicons-regular/ChevronDown'
-import { StyledButton, StyledContent, StyledEvent, StyledHeader, StyledIcon, StyledParticipant, StyledParticipantsWrapper } from './style'
-import { EventDataType } from '../../types/EventType'
-import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+
+import { useJoinEvent } from '../../hooks/eventHooks'
 import { FormModes, setFormMode } from '../../slices/form'
+import { EventDataType } from '../../types/EventType'
+import { UserType } from '../../types/UserType'
+import { StyledButton, StyledContent, StyledEvent, StyledHeader, StyledIcon, StyledParticipant, StyledParticipantsWrapper } from './style'
+
+
 
 type Props = {
   event: EventDataType

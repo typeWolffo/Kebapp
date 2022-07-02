@@ -2,6 +2,7 @@ import { UserType } from './UserType'
 export interface EventDataType {
   id?: number
   location: string
+  notes?: { value: string }[]
   start_at: Date
   is_active?: boolean
   author?: UserType
@@ -19,4 +20,5 @@ export interface ManageEventType {
   id?: number
   location: string
   start_at: Date
+  notes?: { value: string }[]
 }

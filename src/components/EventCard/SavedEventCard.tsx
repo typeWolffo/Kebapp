@@ -1,5 +1,6 @@
 import { ChevronDown } from '@styled-icons/boxicons-regular'
 import { useState } from 'react'
+
 import { ManageEventType } from '../../types/EventType'
 import { StyledContent, StyledEvent, StyledHeader, StyledIcon } from './style'
 

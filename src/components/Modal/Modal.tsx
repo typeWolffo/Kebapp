@@ -1,10 +1,11 @@
 import { Dialog, Transition } from '@headlessui/react'
+import { X } from '@styled-icons/boxicons-regular'
 import { FC, Fragment } from 'react'
 import { useSelector } from 'react-redux'
+
 import CreateEvent from '../../pages/CreateEvent/CreateEvent'
 import { closeModal } from '../../slices/modal'
 import { RootState, useAppDispatch } from '../../store/store'
-import { X } from '@styled-icons/boxicons-regular'
 
 function Modal({ isOpen }: { isOpen: boolean }) {
   const dispatch = useAppDispatch()

@@ -1,7 +1,7 @@
 import { Cog } from '@styled-icons/boxicons-regular/Cog'
 import { Home } from '@styled-icons/boxicons-regular/Home'
-import { MessageSquareAdd } from '@styled-icons/boxicons-regular/MessageSquareAdd'
 import { Menu } from '@styled-icons/boxicons-regular/Menu'
+import { MessageSquareAdd } from '@styled-icons/boxicons-regular/MessageSquareAdd'
 import tw from 'tailwind-styled-components'
 
 export const SettingsIcon = tw(Cog)`

@@ -1,10 +1,11 @@
 /* eslint-disable camelcase */
+import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import * as Yup from 'yup'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+
 import { registerUser } from '../../slices/auth'
 import { RegisterUserDataType } from '../../types/RegisterUserDataType'
 

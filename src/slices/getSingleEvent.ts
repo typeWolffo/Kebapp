@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+
 import Api from '../services/api'
 import { EventDataType } from '../types/EventType'
 import { setMessage } from './message'

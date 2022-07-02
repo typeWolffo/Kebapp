@@ -73,6 +73,25 @@
     "react/jsx-one-expression-per-line": "off",
     "react/jsx-wrap-multilines": "off",
     "react/destructuring-assignment": "off",
-    "react-hooks/exhaustive-deps": "off"
+    "react-hooks/exhaustive-deps": "off",
+    "import/export": "warn",
+    "import/order": [
+      "error",
+      {
+        "pathGroups": [
+          {
+            "pattern": "@selleo/**",
+            "group": "external"
+          }
+        ],
+        "groups": [["external", "builtin"], "internal", ["sibling", "parent"], "index"],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ],
+    "sort-imports": ["warn", { "ignoreCase": true, "ignoreDeclarationSort": true }]
   }
 }

@@ -1,11 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
+import { useDispatch } from 'react-redux'
+
 import authReducer from '../slices/auth'
-import messageReducer from '../slices/message'
 import eventReducer from '../slices/event'
-import modalReducer from '../slices/modal'
 import formReducer from '../slices/form'
 import getAllEventsReducer from '../slices/getAllEvents'
-import { useDispatch } from 'react-redux'
+import messageReducer from '../slices/message'
+import modalReducer from '../slices/modal'
 
 const reducer = {
   auth: authReducer,

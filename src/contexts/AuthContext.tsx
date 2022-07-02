@@ -1,7 +1,7 @@
 import React, { createContext, ReactNode, useContext, useMemo } from 'react'
 
-import AuthService from '../services/authService'
 import Api from '../services/api'
+import AuthService from '../services/authService'
 
 const ApiContext = createContext({})
 

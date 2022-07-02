@@ -1,5 +1,5 @@
-import { Telegram } from '@styled-icons/boxicons-logos/Telegram'
 import { Github } from '@styled-icons/boxicons-logos/Github'
+import { Telegram } from '@styled-icons/boxicons-logos/Telegram'
 import styled from 'styled-components'
 
 const TelegramIcon = styled(Telegram)`

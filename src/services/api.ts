@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
+
 import { EventDataType, ManageEventType } from '../types/EventType'
 
 class Api {
@@ -18,7 +19,7 @@ class Api {
         const token = localStorage.getItem('token')
         if (token && config.headers) {
           config.headers.Authorization = `Bearer ${token}`
-          config.headers['Content-Type'] = 'application/json'
+          config.headers.ContentType = 'application/json'
           return config
         }
       },
