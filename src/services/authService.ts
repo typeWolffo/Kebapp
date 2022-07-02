@@ -5,7 +5,7 @@ class AuthService {
 
   constructor() {
     this.instance = axios.create({
-      baseURL: 'https://kebapp.com.pl/api/auth',
+      baseURL: 'https://api.kebapp.com.pl/api/auth',
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Content-Type': 'application/json;charset=UTF-8',

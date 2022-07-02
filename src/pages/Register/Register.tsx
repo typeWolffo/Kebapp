@@ -58,13 +58,13 @@ function Register() {
   return (
     <StyledFormWrapper>
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
-        <input type="text" placeholder="Username" {...register('name')} className="input input-bordered input-primary w-full max-w-xs mb-5" />
+        <input type="text" placeholder="Username" {...register('name')} className="text-primary input input-bordered input-primary w-full max-w-xs mb-5" />
         <p>{errors.name?.message}</p>
-        <input type="text" placeholder="Email" {...register('email')} className="input input-bordered input-primary w-full max-w-xs mb-5" />
+        <input type="text" placeholder="Email" {...register('email')} className="text-primary input input-bordered input-primary w-full max-w-xs mb-5" />
         <p>{errors.email?.message}</p>
-        <input type="password" placeholder="Password" {...register('password')} className="input input-bordered input-primary w-full max-w-xs mb-5" />
+        <input type="password" placeholder="Password" {...register('password')} className="text-primary input input-bordered input-primary w-full max-w-xs mb-5" />
         <p>{errors.password?.message}</p>
-        <input type="password" placeholder="Confirm password" {...register('password_confirmation')} className="input input-bordered input-primary w-full max-w-xs mb-5" />
+        <input type="password" placeholder="Confirm password" {...register('password_confirmation')} className="text-primary input input-bordered input-primary w-full max-w-xs mb-5" />
         <p>{errors.password_confirmation?.message}</p>
 
         <button type="submit" className="btn btn-outline btn-info w-3/4">
